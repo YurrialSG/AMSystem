@@ -1,6 +1,22 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
 <link href="<?= base_url('assets/css/signin.css') ?>" rel="stylesheet">
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function () {
+
+<?php
+if ($this->session->has_userdata('mensa')) {
+    $mensa = $this->session->flashdata('mensa');
+    if ($this->session->flashdata('tipo') == '0') {
+        ?>
+                swal("Erro", "<?= $mensa ?>", "error");
+        <?php
+    }
+}
+?>
+        document.getElementById("txtEmail").focus();
+
         $(".menuRecuperarSenha").hide();
 
         $("#recuperarSenha-Link").click(function () {
@@ -10,21 +26,6 @@
         $("#cancelar").click(function () {
             $(".menuRecuperarSenha").fadeOut(200);
         });
-
-<?php
-if ($this->session->has_userdata('mensa')) {
-    $mensa = $this->session->flashdata('mensa');
-    if ($this->session->flashdata('tipo') == '1') {
-        ?>
-                $(".alert-success").delay(10000).fadeIn();
-                $(".alert-success").fadeOut(100);
-    <?php } else { ?>
-                $(".alert-danger").delay(10000).fadeIn();
-                $(".alert-danger").fadeOut(100);
-        <?php
-    }
-}
-?>
 
     });
 </script>
@@ -40,6 +41,62 @@ if ($this->session->has_userdata('mensa')) {
 </script>
 
 <style>
+    body {
+        color: #fff;
+        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+        background-size: 400% 400%;
+        -webkit-animation: Gradient 15s ease infinite;
+        -moz-animation: Gradient 15s ease infinite;
+        animation: Gradient 15s ease infinite;
+    }
+
+    @-webkit-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @-moz-keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    @keyframes Gradient {
+        0% {
+            background-position: 0% 50%
+        }
+        50% {
+            background-position: 100% 50%
+        }
+        100% {
+            background-position: 0% 50%
+        }
+    }
+
+    h1,
+    h6 {
+        font-family: 'Open Sans';
+        font-weight: 300;
+        text-align: center;
+        position: absolute;
+        top: 45%;
+        right: 0;
+        left: 0;
+    }
+
     .form-style-6{
         font: 95% Arial, Helvetica, sans-serif;
         max-width: 400px;
@@ -240,6 +297,7 @@ if ($this->session->has_userdata('mensa')) {
         width: 100%;
         cursor: pointer;
         text-align: right;
+        border-radius: 100px;
     }
 
 
@@ -254,36 +312,30 @@ if ($this->session->has_userdata('mensa')) {
         box-shadow: 0 0 2px #E86C8D;
     }
 
+    #formRecuperarSenha {
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        -ms-transition: all 0.30s ease-in-out;
+        -o-transition: all 0.30s ease-in-out;
+        width: 450px;
+        color: whitesmoke;
+    }
+
+    #icon{
+        padding: 1px;
+        width: 60px;
+        height: 50px;
+    }
 
 </style>
 
 <body>
 
     <div class="container">
-
-        <?php
-        if ($this->session->has_userdata('mensa')) {
-
-            $mensa = $this->session->flashdata('mensa');
-            if ($this->session->flashdata('tipo') == '1') {
-
-                echo '<div class="alert alert-success" style="text-align:center;">';
-                echo'<strong>Ok! </strong>' . $mensa;
-                echo' </div>';
-            } else {
-                echo '<div class="alert alert-danger" style="text-align:center;">';
-                echo '<strong>Erro! </strong>' . $mensa;
-                echo' </div>';
-            }
-        }
-        ?>
-
-        <br>
-
         <div class="form-style-6">
-            <input type="button" id="titulo" onclick="document.location.href = '<?= base_url() ?>'" value="Login"/>
+            <input type="button" id="titulo" onclick="document.location.href = '<?= base_url() ?>'" value="AMSystem"/>
             <form class="form-signin" method="post" action="<?= base_url('usuarios/logar') ?>">
-                <input type="email" name="email" placeholder="E-mail de Acesso" required autofocus/>
+                <input type="email" name="email" id="txtEmail" placeholder="E-mail de Acesso" required autofocus/>
                 <input type="password" name="senha" placeholder="Senha" required/>
                 <p>
                     <input type="submit" value="Entrar" />
@@ -299,17 +351,17 @@ if ($this->session->has_userdata('mensa')) {
     </div>
 
     <div class="menuRecuperarSenha">
-        <form action="<?= base_url('usuarios/envioEmailRecuperarSenha') ?>" method="post" name="Form inicial para recuperar a senha">
+        <form action="<?= base_url('usuarios/envioEmailRecuperarSenha') ?>" id="formRecuperarSenha" method="post" name="Form inicial para recuperar a senha">
             <p class="help-block" id="cancelar">
                 <a id="cancelar">
-                    <span style="color: #27A0A0">C</span>
-                    <span style="color: #2CBBBB">A</span>
-                    <span style="color: #27A0A0">N</span>
-                    <span style="color: #2CBBBB">C</span>
-                    <span style="color: #27A0A0">E</span>
-                    <span style="color: #2CBBBB">L</span>
-                    <span style="color: #27A0A0">A</span>
-                    <span style="color: #2CBBBB">R</span>
+                    <span style="color: white">C</span>
+                    <span style="color: white">A</span>
+                    <span style="color: white">N</span>
+                    <span style="color: white">C</span>
+                    <span style="color: white">E</span>
+                    <span style="color: white">L</span>
+                    <span style="color: white">A</span>
+                    <span style="color: white">R</span>
                 </a>
             </p>
             <div class="header">
@@ -329,4 +381,3 @@ if ($this->session->has_userdata('mensa')) {
     </div>
 
 </body>
-</html>

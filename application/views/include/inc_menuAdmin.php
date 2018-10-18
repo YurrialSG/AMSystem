@@ -4,7 +4,7 @@
         margin: 0;
         margin-top: -20px;
     }
-    
+
     .menu {
         list-style-type: none;
         margin: 0;
@@ -18,7 +18,7 @@
         -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
         position: fixed;
     }
-    
+
     .disabilitar {
         pointer-events: none;
         cursor: default;

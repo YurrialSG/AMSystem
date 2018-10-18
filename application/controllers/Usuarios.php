@@ -58,7 +58,7 @@ class Usuarios extends CI_Controller {
             redirect();
         } else {
             $tipo = "0";
-            $mensa .= "E-mail/Senha inválida.";
+            $mensa .= "E-mail/Senha inválido.";
             $this->session->set_flashdata('tipo', $tipo);
             $this->session->set_flashdata('mensa', $mensa);
             redirect('usuarios/login');
