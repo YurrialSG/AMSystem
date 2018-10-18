@@ -101,7 +101,7 @@
                         <div class="contents text-center">
                             <h2 class="head-title wow fadeInUp">AMSystem<br> Sistema de Gerenciamento de Acidentes</h2>
                             <div class="header-button wow fadeInUp" data-wow-delay="0.3s">
-                                <a href="#" class="btn btn-common">Cadastrar-se</a>
+                                <a href="<?= base_url('usuarios/cadastrar') ?>" class="btn btn-common">Cadastrar-se</a>
                             </div>
                         </div>
                         <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">

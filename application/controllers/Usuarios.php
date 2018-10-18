@@ -16,7 +16,9 @@ class Usuarios extends CI_Controller {
             $this->load->view('include/inc_header.php');
             $this->load->view('indexCliente');
         } else {
-            if ($this->session->status == 2) {
+            if ($this->session->status == 1) {
+                $this->load->view(redirect('admin/cadastro'));
+            } if ($this->session->status == 2) {
                 $this->load->view(redirect('admin/pagina'));
             } else {
                 $this->load->view('include/inc_header.php');
@@ -35,6 +37,30 @@ class Usuarios extends CI_Controller {
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
         $this->load->view('manut_usuarios', $dados);
+    }
+
+    public function cadastrar() {
+        $this->load->view('include/inc_header.php');
+        $this->load->view('cadastrarSe');
+    }
+
+    public function incluir() {
+        $dados = $this->input->post();
+        $dados['senha'] = md5($this->input->post('senha'));
+        $dados['status'] = 1;
+        $realizou = $this->usuariosM->insert($dados);
+
+        if ($realizou) {
+            $tipo = "1";
+            $mensa .= "Cadastro realizado com sucesso!";
+        } else {
+            $tipo = "0";
+            $mensa .= "Cadastro não efetuado.";
+        }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+
+        redirect(base_url('usuarios/cadastrar'));
     }
 
     public function login() {
