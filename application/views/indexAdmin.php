@@ -9,7 +9,7 @@
 </script>-->
 <style>
     body{
-        background-color: whitesmoke;
+        background-color: white;
     }
 
     #quadroProduto{

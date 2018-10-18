@@ -14,23 +14,27 @@ class Usuarios extends CI_Controller {
     public function verica_sessao() {
         if (!$this->session->logado) {
             $this->load->view('include/inc_header.php');
-            $this->load->view('include/inc_navbarCli.php');
             $this->load->view('indexCliente');
-            $this->load->view('include/inc_footer.php');
         } else {
-            if ($this->session->status == 1) {
+            if ($this->session->status == 2) {
                 $this->load->view(redirect('admin/pagina'));
             } else {
                 $this->load->view('include/inc_header.php');
-                $this->load->view('include/inc_navbarCli.php');
                 $this->load->view('indexCliente');
-                $this->load->view('include/inc_footer.php');
             }
         }
     }
 
     public function index() {
         $this->verica_sessao();
+    }
+
+    public function usuariosAdmin() {
+        $dados['usuarios'] = $this->usuariosM->select();
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('manut_usuarios', $dados);
     }
 
     public function login() {

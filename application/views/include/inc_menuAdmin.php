@@ -1,4 +1,10 @@
 <style>
+    .col-sm-2 {
+        padding: 0;
+        margin: 0;
+        margin-top: -20px;
+    }
+    
     .menu {
         list-style-type: none;
         margin: 0;
@@ -6,14 +12,17 @@
         width: 200px;
         background-color: transparent;
         height: 100%;
-        position: fixed;
         overflow: auto;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+        position: fixed;
     }
     
     .disabilitar {
         pointer-events: none;
         cursor: default;
-        background-color: #ddd;
+        background-color: white;
     }
 
     li a {
@@ -30,7 +39,7 @@
     }
 
     li a.active {
-        background-color: #4CAF50;
+        background-color: teal;
         color: white;
     }
 
@@ -43,16 +52,14 @@
 
 <div class="col-sm-2">
     <ul class="menu">
-        <h3 style="text-align: center;">Administrador</h3>
         <li><a class="active" href="<?= base_url('admin/pagina') ?>">Home</a></li>
-        <li><a href="<?= base_url('produtos') ?>">Produtos</a></li>
-        <li><a href="<?= base_url('categorias') ?>">Categorias</a></li>
-        <li><a href="<?= base_url('marcas') ?>">Marcas</a></li>
-        <li><a href="<?= base_url('pais') ?>">Pais</a></li>
-        <li><a href="<?= base_url('estado') ?>">Estado</a></li>
-        <li><a href="<?= base_url('cidade') ?>">Cidade</a></li>
-        <li class="disabilitar"><a href="<?= base_url('itensVenda') ?>">Itens Vendas</a></li>
-        <li class="disabilitar"><a href="<?= base_url('vendas') ?>">Vendas</a></li>
+        <li><a href="<?= base_url('produtos') ?>">Empresas</a></li>
+        <li><a href="<?= base_url('categorias') ?>">Funcionários</a></li>
+        <li><a href="<?= base_url('marcas') ?>">Setores</a></li>
+        <li><a href="<?= base_url('pais') ?>">Acidentes</a></li>
+        <li><a href="<?= base_url('estado') ?>">Usuários</a></li>
+        <li class="disabilitar"><a href="<?= base_url('itensVenda') ?>">NR's</a></li>
+        <li class="disabilitar"><a href="<?= base_url('vendas') ?>">Anexos</a></li>
         <li><a href="<?= base_url('usuarios/usuariosAdmin') ?>">Usuários Admin</a></li>
     </ul>
 </div>
