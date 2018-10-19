@@ -59,7 +59,7 @@
         <li><a href="<?= base_url('pais') ?>">Acidentes</a></li>
         <li><a href="<?= base_url('estado') ?>">Usuários</a></li>
         <li class="disabilitar"><a href="<?= base_url('itensVenda') ?>">NR's</a></li>
-        <li class="disabilitar"><a href="<?= base_url('vendas') ?>">Anexos</a></li>
+        <li><a href="<?= base_url('anexos') ?>">Anexos</a></li>
         <li><a href="<?= base_url('usuarios/usuariosAdmin') ?>">Usuários Admin</a></li>
     </ul>
 </div>
