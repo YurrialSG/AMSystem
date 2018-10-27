@@ -7,6 +7,8 @@ class Usuarios extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('model_usuario', 'usuariosM');
+        $this->load->model('model_endereco', 'enderecosM');
+        $this->load->model('model_empresa', 'empresasM');
         //configura fuso horário desta classe
         date_default_timezone_set('America/Sao_Paulo');
     }
@@ -61,6 +63,16 @@ class Usuarios extends CI_Controller {
         $this->session->set_flashdata('mensa', $mensa);
 
         redirect(base_url('usuarios/cadastrar'));
+    }
+    
+    public function cadastroInicial() {
+        $logradouro = $this->input->post('logradouro');
+        $numero = $this->input->post('numero');
+        $complemento = $this->input->post('complemento');
+        $cep = $this->input->post('cep');
+        $bairro = $this->input->post('bairro');
+        $status = 1;
+        $this->enderecosM->insert($logradouro, $numero, $complemento, $cep, $bairro, $status);    
     }
 
     public function login() {

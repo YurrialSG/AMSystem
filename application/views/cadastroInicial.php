@@ -30,11 +30,27 @@
         text-align:left
     }
 
+    form h5 {
+        font-size: 18px;
+        background: #c6c8ca none repeat scroll 0% 0%;
+        color: rgb(255, 255, 255);
+        padding: 15px 70px;
+        border-radius: 0px 0px 0px 0px;
+        margin: auto;
+        margin-left: -100px;
+        margin-right: -500px;
+        margin-bottom: 2%;
+        margin-top: 40%;
+        text-shadow: none; 
+        text-align:left
+    }
+
     form {
-        border-radius: 5px;
-        max-width:800px;
+        border-radius: 40px;
+        max-width: 80%;
         width:100%;
         margin: auto;
+        margin-bottom: 5%;
         background-color: #FFFFFF;
         overflow: hidden;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
@@ -54,6 +70,13 @@
     }
 
     h1 {
+        text-align:center; 
+        color: #666;
+        text-shadow: 1px 1px 0px #FFF;
+        margin:50px 0px 0px 0px
+    }
+
+    h5 {
         text-align:center; 
         color: #666;
         text-shadow: 1px 1px 0px #FFF;
@@ -94,7 +117,7 @@
         float: left;
         border-radius: 5px 0px 0px 5px;
         background:#eeeeee;
-        height:42px;
+        height:40px;
         position: relative;
         text-align: center;
         line-height:40px;
@@ -105,7 +128,7 @@
     }
 
     .contentform {
-        padding: 40px 30px;
+        padding: 15px 60px;
     }
 
     .bouton-contact{
@@ -138,43 +161,42 @@
 
     .validation {
         display:none;
-        margin: 0 0 10px;
-        font-weight:400;
-        font-size:13px;
         color: #DE5959;
     }
 </style>
 
+<script src="<?= base_url('assets/js/ajax_Cep.js') ?>"></script>
+
 <body>
-    <form>
+    <form method="post" action="<?= base_url('usuarios/cadastroInicial') ?>">
         <h1>Por favor preencha o formulário para acessar o sistema:</h1>
         <div class="contentform">
             <div class="leftcontact">
                 <div class="form-group">
                     <p>Cep<span>*</span></p>
                     <span class="icon-case"><i class="fa fa-male"></i></span>
-                    <input type="text" name="nom" id="nom"/>
-                    <div class="validation"></div>
+                    <input type="text" name="cep" id="cep" required autofocus/>
+                    <span id="validaNome" class="text-danger"></span>
                 </div> 
 
                 <div class="form-group">
                     <p>Logradouro <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-user"></i></span>
-                    <input type="text" name="prenom" id="prenom"/>
+                    <input type="text" name="logradouro" id="logradouro" required/>
                     <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Número <span>*</span></p>	
                     <span class="icon-case"><i class="fa fa-envelope-o"></i></span>
-                    <input type="email" name="email" id="email"/>
+                    <input type="number" name="numero" id="numero" required/>
                     <div class="validation"></div>
                 </div>	
 
                 <div class="form-group">
                     <p>Complemento <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-home"></i></span>
-                    <input type="text" name="society" id="society"/>
+                    <input type="number" name="complemento" id="complemento"/>
                     <div class="validation"></div>
                 </div>
 
@@ -185,24 +207,47 @@
                 <div class="form-group">
                     <p>Bairro <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-location-arrow"></i></span>
-                    <input type="text" name="adresse" id="adresse"/>
+                    <input type="text" name="bairro" id="bairro" required/>
                     <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Cidade <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-map-marker"></i></span>
-                    <input type="text" name="postal" id="postal" />
+                    <input type="text" name="cidade" id="cidade" required/>
                     <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Estado <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-map-marker"></i></span>
-                    <input type="text" name="postal" id="postal"/>
+                    <input type="text" name="estado" id="estado" required/>
                     <div class="validation"></div>
                 </div>	
 
+            </div>
+
+            <h5>Dados da Empresa: </h5>
+
+            <div class="form-group" style="width: 70%;">
+                <p>Razão social <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-user"></i></span>
+                <input type="text" name="razaoSocial" id="razaoSocial" required/>
+                <div class="validation"></div>
+            </div>
+
+            <div class="form-group" style="width: 50%;">
+                <p>Nome <span>*</span></p>	
+                <span class="icon-case"><i class="fa fa-envelope-o"></i></span>
+                <input type="text" name="nomeEmpresa" id="nomeEmpresa" required/>
+                <div class="validation"></div>
+            </div>	
+
+            <div class="form-group" style="width: 30%;">
+                <p>Cnpj <span>*</span></p>
+                <span class="icon-case"><i class="fa fa-home"></i></span>
+                <input type="text" name="cpnj" id="cpnj" required/>
+                <div class="validation"></div>
             </div>
         </div>
         <button type="submit" class="bouton-contact">Enviar</button>

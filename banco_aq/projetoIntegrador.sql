@@ -1,22 +1,11 @@
 DROP DATABASE IF EXISTS projetointegrador;
 
-CREATE DATABASE projetointegrador;
+CREATE DATABASE projetointegrador CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE projetointegrador;
 
 -- 1
-CREATE TABLE usuario (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome varchar(50) NOT NULL,
-  email varchar(50) NOT NULL,
-  senha varchar(50) NOT NULL,
-  hashTemporaria varchar(92) DEFAULT NULL,
-  status int NOT NULL,
-  PRIMARY KEY(id)
-);
-
--- 2
-CREATE TABLE IF NOT EXISTS empresa (
+CREATE TABLE empresa (
   id INT NOT NULL AUTO_INCREMENT,
   razaoSocial varchar(50) NOT NULL,
   nome varchar(50) NOT NULL,
@@ -24,23 +13,8 @@ CREATE TABLE IF NOT EXISTS empresa (
   status int NOT NULL,
   PRIMARY KEY(id)
 );
--- 3
-CREATE TABLE IF NOT EXISTS usuario (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome varchar(50) NOT NULL,
-  email varchar(50) NOT NULL,
-  senha varchar(50) NOT NULL,
-  hashTemporaria varchar(92) DEFAULT NULL,
-  idEmpresa int,
-  status int NOT NULL,
 
-  CONSTRAINT FK_usuario_empresa
-  FOREIGN KEY (idEmpresa)
-  REFERENCES empresa(id),
-
-  PRIMARY KEY(id)
-);
--- 4
+-- 2
 CREATE TABLE IF NOT EXISTS setor (
   id INT NOT NULL AUTO_INCREMENT,
   nome varchar(50) NOT NULL,
@@ -53,7 +27,8 @@ CREATE TABLE IF NOT EXISTS setor (
 
   PRIMARY KEY(id)
 );
--- 5
+
+-- 3
 CREATE TABLE IF NOT EXISTS funcao (
   id INT NOT NULL AUTO_INCREMENT,
   descricao varchar(50) NOT NULL,
@@ -66,13 +41,15 @@ CREATE TABLE IF NOT EXISTS funcao (
 
   PRIMARY KEY(id)
 );
--- 6
+
+-- 4
 CREATE TABLE IF NOT EXISTS estado (
   id INT NOT NULL AUTO_INCREMENT,
   sigla varchar(50) NOT NULL,
   PRIMARY KEY(id)
 );
--- 7
+
+-- 5
 CREATE TABLE IF NOT EXISTS cidade (
   id INT NOT NULL AUTO_INCREMENT,
   nome varchar(50) NOT NULL,
@@ -84,7 +61,8 @@ CREATE TABLE IF NOT EXISTS cidade (
 
   PRIMARY KEY(id)
 );
--- 8
+
+-- 6
 CREATE TABLE IF NOT EXISTS endereco (
   id INT NOT NULL AUTO_INCREMENT,
   logradouro varchar(50) NOT NULL,
@@ -101,7 +79,8 @@ CREATE TABLE IF NOT EXISTS endereco (
 
   PRIMARY KEY(id)
 );
--- 9
+
+-- 7
 CREATE TABLE IF NOT EXISTS funcionario (
   id int AUTO_INCREMENT,
   nome varchar(50) NOT NULL,
@@ -130,7 +109,8 @@ CREATE TABLE IF NOT EXISTS funcionario (
 
   PRIMARY KEY(id)
 );
--- 10
+
+-- 8
 CREATE TABLE IF NOT EXISTS infoAcidente (
   id int AUTO_INCREMENT,
   tipoDeRisco varchar(50) NOT NULL,
@@ -139,7 +119,8 @@ CREATE TABLE IF NOT EXISTS infoAcidente (
 
   PRIMARY KEY(id)
 );
--- 11
+
+-- 9
 CREATE TABLE IF NOT EXISTS acidente (
   id int AUTO_INCREMENT,
   descricao varchar(50) NOT NULL,
@@ -158,6 +139,29 @@ CREATE TABLE IF NOT EXISTS acidente (
 
   PRIMARY KEY(id)
 );
+
+-- 10
+CREATE TABLE usuario (
+  id INT NOT NULL AUTO_INCREMENT,
+  nome varchar(50) NOT NULL,
+  email varchar(50) NOT NULL,
+  senha varchar(50) NOT NULL,
+  hashTemporaria varchar(92) DEFAULT NULL,
+  idEmpresa int,
+  idEndereco int,
+  status int NOT NULL,
+
+  CONSTRAINT FK_usuario_empresa
+  FOREIGN KEY (idEmpresa)
+  REFERENCES empresa(id),
+
+  CONSTRAINT FK_usuario_endereco
+  FOREIGN KEY (idEndereco)
+  REFERENCES endereco(id),
+
+  PRIMARY KEY(id)
+);
+
 
 INSERT INTO usuario (nome, email, senha, status) VALUES 
 ("Caio Francisco Lopes", "caio@gmail.com",(MD5("Caio@123")),2),
