@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
     body {
         margin: auto;
@@ -158,14 +158,17 @@
         box-sizing: border-box;
         padding: 0px 0px 0px 15px;
     }
-
-    .validation {
-        display:none;
-        color: #DE5959;
-    }
 </style>
 
 <script src="<?= base_url('assets/js/ajax_Cep.js') ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery(function ($) {
+            $("#cep").mask("99999-999");
+            $("#cpnj").mask("99.999.999/9999-99");
+        });
+    });
+</script>
 
 <body>
     <form method="post" action="<?= base_url('usuarios/cadastroInicial') ?>">
@@ -173,31 +176,27 @@
         <div class="contentform">
             <div class="leftcontact">
                 <div class="form-group">
-                    <p>Cep<span>*</span></p>
+                    <p>Cep<span>*</span><span id="validation" style="color: #fb3958; padding-left: 35%;"></span></p>
                     <span class="icon-case"><i class="fa fa-male"></i></span>
-                    <input type="text" name="cep" id="cep" required autofocus/>
-                    <span id="validaNome" class="text-danger"></span>
+                    <input type="text" name="cep" id="cep" required autofocus/>            
                 </div> 
 
                 <div class="form-group">
                     <p>Logradouro <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-user"></i></span>
                     <input type="text" name="logradouro" id="logradouro" required/>
-                    <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Número <span>*</span></p>	
                     <span class="icon-case"><i class="fa fa-envelope-o"></i></span>
-                    <input type="number" name="numero" id="numero" required/>
-                    <div class="validation"></div>
+                    <input type="number" name="numero" min="0" max="999999999999" id="numero" required/>
                 </div>	
 
                 <div class="form-group">
                     <p>Complemento <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-home"></i></span>
-                    <input type="number" name="complemento" id="complemento"/>
-                    <div class="validation"></div>
+                    <input type="number" name="complemento" min="0" max="99999999999" id="complemento"/>
                 </div>
 
             </div>
@@ -208,21 +207,18 @@
                     <p>Bairro <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-location-arrow"></i></span>
                     <input type="text" name="bairro" id="bairro" required/>
-                    <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Cidade <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-map-marker"></i></span>
                     <input type="text" name="cidade" id="cidade" required/>
-                    <div class="validation"></div>
                 </div>
 
                 <div class="form-group">
                     <p>Estado <span>*</span></p>
                     <span class="icon-case"><i class="fa fa-map-marker"></i></span>
                     <input type="text" name="estado" id="estado" required/>
-                    <div class="validation"></div>
                 </div>	
 
             </div>
@@ -233,21 +229,18 @@
                 <p>Razão social <span>*</span></p>
                 <span class="icon-case"><i class="fa fa-user"></i></span>
                 <input type="text" name="razaoSocial" id="razaoSocial" required/>
-                <div class="validation"></div>
             </div>
 
             <div class="form-group" style="width: 50%;">
                 <p>Nome <span>*</span></p>	
                 <span class="icon-case"><i class="fa fa-envelope-o"></i></span>
                 <input type="text" name="nomeEmpresa" id="nomeEmpresa" required/>
-                <div class="validation"></div>
             </div>	
 
             <div class="form-group" style="width: 30%;">
                 <p>Cnpj <span>*</span></p>
                 <span class="icon-case"><i class="fa fa-home"></i></span>
                 <input type="text" name="cpnj" id="cpnj" required/>
-                <div class="validation"></div>
             </div>
         </div>
         <button type="submit" class="bouton-contact">Enviar</button>

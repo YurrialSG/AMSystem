@@ -7,17 +7,18 @@ class model_endereco extends CI_Model {
         return $this->db->get('usuario')->result();
     }
 
-    public function insert($logradouro, $numero, $complemento, $cep, $bairro, $status) {
-        $sql = "INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, status) ";
+    public function insert($logradouro, $numero, $complemento, $cep, $bairro, $idCidade, $status) {
+        $sql = "INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, idCidade, status) ";
         $sql .= "VALUES ("
                 . "'" . $logradouro . "',"
                 . "'" . $numero . "',"
                 . "'" . $complemento . "',"
                 . "'" . $cep . "',"
                 . "'" . $bairro . "',"
+                . "'" . $idCidade . "',"
                 . "'" . $status . "');";
         $this->db->query($sql);
-        return $this->db->affected_rows();
+        return $this->db->insert_id();
     }
 
     public function delete($id) {

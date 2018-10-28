@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
 <link href="<?= base_url('assets/css/signin.css') ?>" rel="stylesheet">
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -101,6 +102,7 @@ if ($this->session->has_userdata('mensa')) {
         font: 95% Arial, Helvetica, sans-serif;
         max-width: 400px;
         margin: 0px auto;
+        margin-top: -10px;
         padding: 0px;
         background: white;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
@@ -109,7 +111,7 @@ if ($this->session->has_userdata('mensa')) {
     }
     .form-style-6 #titulo{
         background: #43D1AF;
-        padding: 20px 0;
+        padding: 15px 0;
         font-size: 140%;
         font-weight: 300;
         width: 100%;
@@ -234,10 +236,10 @@ if ($this->session->has_userdata('mensa')) {
 
 
     form {
-        padding-top: 10px;
-        width: 450px;
+        padding-top: 0px;
         margin: 0 auto;
         text-align: center;
+        width: 450px;
     }
 
 
@@ -317,7 +319,7 @@ if ($this->session->has_userdata('mensa')) {
         -moz-transition: all 0.30s ease-in-out;
         -ms-transition: all 0.30s ease-in-out;
         -o-transition: all 0.30s ease-in-out;
-        width: 450px;
+        width: 58%;
         color: whitesmoke;
     }
 
@@ -335,8 +337,11 @@ if ($this->session->has_userdata('mensa')) {
         <div class="form-style-6">
             <input type="button" id="titulo" onclick="document.location.href = '<?= base_url() ?>'" value="AMSystem"/>
             <form class="form-signin" method="post" action="<?= base_url('usuarios/logar') ?>">
-                <input type="email" name="email" id="txtEmail" placeholder="E-mail de Acesso" required autofocus/>
+                <input type="email" name="email" id="txtEmail" placeholder="Informe seu E-mail" required autofocus/>
                 <input type="password" name="senha" placeholder="Senha" required/>
+                <br/>
+                <div class="g-recaptcha" data-sitekey="6LfrOHcUAAAAAE_4RFx7UGDOU_hb_jINFKPcSrtE"></div>
+                <br/>
                 <p>
                     <input type="submit" value="Entrar" />
                 </p>

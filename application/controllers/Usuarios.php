@@ -9,6 +9,8 @@ class Usuarios extends CI_Controller {
         $this->load->model('model_usuario', 'usuariosM');
         $this->load->model('model_endereco', 'enderecosM');
         $this->load->model('model_empresa', 'empresasM');
+        $this->load->model('model_estado', 'estadosM');
+        $this->load->model('model_cidade', 'cidadesM');
         //configura fuso horário desta classe
         date_default_timezone_set('America/Sao_Paulo');
     }
@@ -64,15 +66,23 @@ class Usuarios extends CI_Controller {
 
         redirect(base_url('usuarios/cadastrar'));
     }
-    
+
     public function cadastroInicial() {
+        $estado = $this->input->post('estado');
+        $idEstado = $this->estadosM->insert($estado);
+
+
+        $nomeCidade = $this->input->post('cidade');
+        $idCidade = $this->cidadesM->insert($nomeCidade, $idEstado);
+
+
         $logradouro = $this->input->post('logradouro');
         $numero = $this->input->post('numero');
         $complemento = $this->input->post('complemento');
         $cep = $this->input->post('cep');
         $bairro = $this->input->post('bairro');
         $status = 1;
-        $this->enderecosM->insert($logradouro, $numero, $complemento, $cep, $bairro, $status);    
+        $this->enderecosM->insert($logradouro, $numero, $complemento, $cep, $bairro, $idCidade, $status);
     }
 
     public function login() {
@@ -85,18 +95,41 @@ class Usuarios extends CI_Controller {
         $email = $this->input->post('email');
         $senha = md5($this->input->post('senha'));
 
-        $verifica = $this->usuariosM->verificaUsuario($email, $senha);
+        $recaptchaResponse = $this->input->post('g-recaptcha-response');
+        $secret = '6LfrOHcUAAAAAKLqXdgThMN08gtddxfvb7TMCWFG';
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data1 = array('secret' => $secret, 'response' => $recaptchaResponse);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $status = json_decode($response, true);
+        
+        if ($status['success']) {
+            $verifica = $this->usuariosM->verificaUsuario($email, $senha);
 
-        if (isset($verifica)) {
-            $sessao['nome'] = $verifica->nome;
-            $sessao['id'] = $verifica->id;
-            $sessao['status'] = $verifica->status;
-            $sessao['logado'] = TRUE;
-            $this->session->set_userdata($sessao);
-            redirect();
+            if (isset($verifica)) {
+                $sessao['nome'] = $verifica->nome;
+                $sessao['id'] = $verifica->id;
+                $sessao['status'] = $verifica->status;
+                $sessao['logado'] = TRUE;
+                $this->session->set_userdata($sessao);
+                redirect();
+            } else {
+                $tipo = "0";
+                $mensa .= "E-mail/Senha inválido.";
+                $this->session->set_flashdata('tipo', $tipo);
+                $this->session->set_flashdata('mensa', $mensa);
+                redirect('usuarios/login');
+            }
         } else {
             $tipo = "0";
-            $mensa .= "E-mail/Senha inválido.";
+            $mensa .= "Marcar o campo 'Não sou um robô'.";
             $this->session->set_flashdata('tipo', $tipo);
             $this->session->set_flashdata('mensa', $mensa);
             redirect('usuarios/login');

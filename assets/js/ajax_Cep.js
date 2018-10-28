@@ -17,7 +17,12 @@ $(document).ready(function () {
                     $("#cidade").val(data.cidade);
                     $("#estado").val(data.estado);
 
+                    $('#validation').html('');
                     $("#numero").focus();
+                }else{
+                    $("#cep").val("");        
+                    $("#cep").focus(); 
+                    $('#validation').html('Cep informado não é válido.');
                 }
             }
         });
