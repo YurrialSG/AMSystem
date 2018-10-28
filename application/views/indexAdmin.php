@@ -1,12 +1,21 @@
-<!--<script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
     $(document).ready(function () {
-        $('#foto')
-                .wrap('<span style="display:inline-block"></span>')
-                .css('display', 'block')
-                .parent()
-                .zoom();
+
+<?php
+if ($this->session->has_userdata('mensa')) {
+    $mensa = $this->session->flashdata('mensa');
+    if ($this->session->flashdata('tipo') == '0') {
+        ?>
+                swal("Erro", "<?= $mensa ?>", "error");
+        <?php
+    } else {
+        ?>
+                swal("Sucesso", "<?= $mensa ?>", "success");
+    <?php }
+} ?>
     });
-</script>-->
+</script>
 <style>
     body{
         background-color: white;

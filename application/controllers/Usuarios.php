@@ -75,14 +75,39 @@ class Usuarios extends CI_Controller {
         $nomeCidade = $this->input->post('cidade');
         $idCidade = $this->cidadesM->insert($nomeCidade, $idEstado);
 
+        $status = 1;
 
         $logradouro = $this->input->post('logradouro');
         $numero = $this->input->post('numero');
         $complemento = $this->input->post('complemento');
         $cep = $this->input->post('cep');
         $bairro = $this->input->post('bairro');
-        $status = 1;
-        $this->enderecosM->insert($logradouro, $numero, $complemento, $cep, $bairro, $idCidade, $status);
+        $idEndereco = $this->enderecosM->insert($logradouro, $numero, $complemento, $cep, $bairro, $idCidade, $status);
+
+        $razaoSocial = $this->input->post('razaoSocial');
+        $nome = $this->input->post('nome');
+        $cnpj = $this->input->post('cnpj');
+        $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $status);
+
+        //inserindo Endereço do usuário logado
+        if ($this->usuariosM->updateEndereco($this->session->id, $idEndereco) &&
+                $this->usuariosM->updateEmpresa($this->session->id, $idEmpresa)) {
+            if ($this->usuariosM->updateStatus($this->session->id)) {
+                $tipo = "1";
+                $mensa .= "Dados cadastrados com sucesso.";
+                $this->session->set_flashdata('tipo', $tipo);
+                $this->session->set_flashdata('mensa', $mensa);
+                $this->load->view(redirect('admin/pagina'));
+            }
+        } else {
+            $tipo = "0";
+            $mensa .= "Erro no cadastro das informações.";
+            $this->session->set_flashdata('tipo', $tipo);
+            $this->session->set_flashdata('mensa', $mensa);
+            redirect('usuarios/cadastrar');
+        }
+
+        //inserindo Empresa do usuário logado
     }
 
     public function login() {
@@ -109,7 +134,7 @@ class Usuarios extends CI_Controller {
         $response = curl_exec($ch);
         curl_close($ch);
         $status = json_decode($response, true);
-        
+
         if ($status['success']) {
             $verifica = $this->usuariosM->verificaUsuario($email, $senha);
 

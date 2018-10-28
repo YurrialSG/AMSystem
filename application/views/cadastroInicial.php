@@ -165,7 +165,7 @@
     $(document).ready(function () {
         jQuery(function ($) {
             $("#cep").mask("99999-999");
-            $("#cpnj").mask("99.999.999/9999-99");
+            $("#cnpj").mask("99.999.999/9999-99");
         });
     });
 </script>
@@ -234,13 +234,13 @@
             <div class="form-group" style="width: 50%;">
                 <p>Nome <span>*</span></p>	
                 <span class="icon-case"><i class="fa fa-envelope-o"></i></span>
-                <input type="text" name="nomeEmpresa" id="nomeEmpresa" required/>
+                <input type="text" name="nome" id="nome" required/>
             </div>	
 
             <div class="form-group" style="width: 30%;">
                 <p>Cnpj <span>*</span></p>
                 <span class="icon-case"><i class="fa fa-home"></i></span>
-                <input type="text" name="cpnj" id="cpnj" required/>
+                <input type="text" name="cnpj" id="cnpj" required/>
             </div>
         </div>
         <button type="submit" class="bouton-contact">Enviar</button>

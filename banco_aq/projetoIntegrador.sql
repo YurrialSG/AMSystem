@@ -10,6 +10,7 @@ CREATE TABLE empresa (
   razaoSocial varchar(50) NOT NULL,
   nome varchar(50) NOT NULL,
   cnpj varchar(50) NOT NULL,
+  foto varchar(50) NOT NULL,
   status int NOT NULL,
   PRIMARY KEY(id)
 );

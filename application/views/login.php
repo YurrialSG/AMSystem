@@ -13,6 +13,10 @@ if ($this->session->has_userdata('mensa')) {
         ?>
                 swal("Erro", "<?= $mensa ?>", "error");
         <?php
+    }else{
+        ?>
+                swal("Sucesso", "<?= $mensa ?>", "success");
+        <?php
     }
 }
 ?>
