@@ -308,7 +308,7 @@
         <div class="row">
             <div class="col-sm-10"></div>
             <div class="col-sm-2">
-                <button type="button" id="btn_voltar" class="btn btn-block btn-default" style="width: 100%;" onclick="document.location.href = '<?= base_url('admin') ?>'"> Voltar</button>
+                <button type="button" id="btn_voltar" class="btn btn-block btn-default btn-circle" style="width: 100%;" onclick="document.location.href = '<?= base_url('admin') ?>'"> Voltar</button>
             </div>
         </div>
         <br />

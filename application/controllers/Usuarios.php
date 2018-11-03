@@ -48,6 +48,13 @@ class Usuarios extends CI_Controller {
         $this->load->view('cadastrarSe');
     }
 
+    public function open_new_usuarios() {
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('crud/cad_usuario');
+    }
+
     public function incluir() {
         $dados = $this->input->post();
         $dados['senha'] = md5($this->input->post('senha'));
