@@ -11,7 +11,7 @@ class Usuarios extends CI_Controller {
         $this->load->model('model_empresa', 'empresasM');
         $this->load->model('model_estado', 'estadosM');
         $this->load->model('model_cidade', 'cidadesM');
-        //configura fuso horário desta classe
+//configura fuso horário desta classe
         date_default_timezone_set('America/Sao_Paulo');
     }
 
@@ -74,6 +74,66 @@ class Usuarios extends CI_Controller {
         redirect(base_url('usuarios/cadastrar'));
     }
 
+    public function incluirUserLogado() {
+        $dados = $this->input->post();
+        $dados['senha'] = md5($this->input->post('senha'));
+        $dados['status'] = 1;
+        $realizou = $this->usuariosM->insert($dados);
+
+        if ($realizou) {
+            $tipo = "1";
+            $mensa .= "Cadastro realizado com sucesso!";
+        } else {
+            $tipo = "0";
+            $mensa .= "Cadastro não efetuado.";
+        }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+
+        redirect(base_url('usuarios/open_new_usuarios'));
+    }
+
+    public function deletar($id) {
+        if ($this->usuariosM->delete($id)) {
+            $tipo = "1";
+            $mensa .= "Remoção realizada com sucesso!";
+        } else {
+            $tipo = "0";
+            $mensa .= "Remoção não efetuada.";
+        }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+
+        redirect(base_url('usuarios/usuariosAdmin'));
+    }
+
+    public function alterar($id) {
+        $this->db->where('id', $id);
+        $dados['usuarios'] = $this->db->get('usuario')->row();
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('crud/alt_usuario', $dados);
+    }
+
+    public function grava_alteracao() {
+        $pegaID = $this->input->post();
+        $pegaID['senha'] = md5($this->input->post('senha'));
+        $this->db->where('id', $pegaID['id']);
+
+        if ($this->usuariosM->update($pegaID)) {
+            $tipo = "1";
+            $mensa .= "Alteração realizada com sucesso!";
+        } else {
+            $tipo = "0";
+            $mensa .= "Alteração não efetuada.";
+        }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+
+        redirect(base_url('usuarios/usuariosAdmin'));
+    }
+
     public function cadastroInicial() {
         $estado = $this->input->post('estado');
         $idEstado = $this->estadosM->insert($estado);
@@ -96,7 +156,7 @@ class Usuarios extends CI_Controller {
         $cnpj = $this->input->post('cnpj');
         $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $status);
 
-        //inserindo Endereço do usuário logado
+//inserindo Endereço do usuário logado
         if ($this->usuariosM->updateEndereco($this->session->id, $idEndereco) &&
                 $this->usuariosM->updateEmpresa($this->session->id, $idEmpresa)) {
             if ($this->usuariosM->updateStatus($this->session->id)) {
@@ -114,7 +174,7 @@ class Usuarios extends CI_Controller {
             redirect('usuarios/cadastrar');
         }
 
-        //inserindo Empresa do usuário logado
+//inserindo Empresa do usuário logado
     }
 
     public function login() {

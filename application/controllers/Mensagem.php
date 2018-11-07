@@ -2,11 +2,11 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Empresa extends CI_Controller {
+class Mensagem extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('model_empresa', 'empresasM');
+        
     }
 
     public function verica_sessao() {
@@ -17,13 +17,7 @@ class Empresa extends CI_Controller {
 
     public function index() {
         $this->verica_sessao();
-        redirect(base_url('empresa/pagina'));
-    }
-
-    public function incluirEmpresa() {
-        $dados = $this->input->post();
-        $dados['status'] = 1;
-        $this->empresasM->insert($dados);
+        redirect(base_url('mensagem/pagina'));
     }
 
     public function pagina() {
@@ -32,7 +26,7 @@ class Empresa extends CI_Controller {
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('manut_empresa');
+        $this->load->view('manut_mensagem');
     }
 
 }

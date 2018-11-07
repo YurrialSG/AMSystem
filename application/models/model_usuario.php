@@ -23,31 +23,9 @@ class model_usuario extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function updateEndereco($idUser, $idEndereco) {
-        $sql = "UPDATE usuario SET idEndereco='" . $idEndereco . "'";
-        $sql .= "WHERE id=$idUser;";
-        $this->db->query($sql);
+    public function update($pegaID) {
+        $this->db->update('usuario', $pegaID);
         return $this->db->affected_rows();
-    }
-
-    public function updateEmpresa($idUser, $idEmpresa) {
-        $sql = "UPDATE usuario SET idEmpresa='" . $idEmpresa . "'";
-        $sql .= "WHERE id=$idUser;";
-        $this->db->query($sql);
-        return $this->db->affected_rows();
-    }
-
-    public function updateStatus($idUser) {
-        $sql = "UPDATE usuario SET status= 2 ";
-        $sql .= "WHERE id=$idUser;";
-        $this->db->query($sql);
-        return $this->db->affected_rows();
-    }
-
-    public function pegarId($emailUser) {
-        $sql = "SELECT id FROM usuario WHERE email = $emailUser";
-        $query = $this->db->query($sql);
-        return $query->row()->id;
     }
 
 }

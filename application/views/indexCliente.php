@@ -33,7 +33,7 @@
                         <span class="icon-menu"></span>
                         <span class="icon-menu"></span>
                     </button>
-                    <a href="<?= base_url() ?>" class="navbar-brand"><img src="assets/img/logo.png" alt=""></a>
+                    <a href="<?= base_url() ?>" class="navbar-brand"><img src="assets/img/AMSystem.png" alt=""></a>
                 </div>
                 <div class="collapse navbar-collapse" id="main-navbar">
                     <ul class="navbar-nav mr-auto w-100 justify-content-left clearfix">
@@ -130,7 +130,7 @@
                             <i class="lni-cog"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Web Development</a></h3>
+                            <h3><a href="#">Empresa</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             <i class="lni-bar-chart"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Graphic Design</a></h3>
+                            <h3><a href="#">Funcionários</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                             <i class="lni-briefcase"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Business Branding</a></h3>
+                            <h3><a href="#">Acidentes</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                             <i class="lni-pencil-alt"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Content Writing</a></h3>
+                            <h3><a href="#">Mensagens</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                             <i class="lni-mobile"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">App Development</a></h3>
+                            <h3><a href="#">Normas Regulamentadoras - NR's</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                             <i class="lni-layers"></i>
                         </div>
                         <div class="services-content">
-                            <h3><a href="#">Digital Marketing</a></h3>
+                            <h3><a href="#">Setores</a></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="text-wrapper">
                         <div>
-                            <h2 class="title-hl wow fadeInLeft" data-wow-delay="0.3s">Learn More About Us</h2>
+                            <h2 class="title-hl wow fadeInLeft" data-wow-delay="0.3s">Aprenda mais sobre nós</h2>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="features-box wow fadeInLeft" data-wow-delay="0.3s">
@@ -217,7 +217,7 @@
                                         </div>
                                         <div class="features-content">
                                             <h4>
-                                                Bootstrap 4
+                                                Gráficos
                                             </h4>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
@@ -232,7 +232,7 @@
                                         </div>
                                         <div class="features-content">
                                             <h4>
-                                                100% Free
+                                                Relatórios
                                             </h4>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
@@ -247,7 +247,7 @@
                                         </div>
                                         <div class="features-content">
                                             <h4>
-                                                Responsive
+                                                Agilidade
                                             </h4>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
@@ -262,7 +262,7 @@
                                         </div>
                                         <div class="features-content">
                                             <h4>
-                                                Easy to Use
+                                                Segurança
                                             </h4>
                                             <p>
                                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
@@ -320,11 +320,11 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-md-10 col-lg-5">
-                    <h4 class="wow fadeInUp" data-wow-delay="0.3s">Start For Free</h4>
+                    <h4 class="wow fadeInUp" data-wow-delay="0.3s">Atualização</h4>
                     <p class="wow fadeInUp" data-wow-delay="0.6s">Existing customized ideas through client-based deliverables. <br> Compellingly unleash fully tested outsourcing</p>
                     <form for="">
                         <div class="subscribe wow fadeInDown" data-wow-delay="0.3s">
-                            <input type="Email" class="form-control" name="email" placeholder="Email Address">
+                            <input type="Email" class="form-control" name="email" placeholder="Adicione seu e-mail">
                             <button class="btn-submit" type="submit"><i class="lni-arrow-right"></i></button>
                         </div>
                     </form>
@@ -340,41 +340,41 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-header text-center">
-                        <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Contact</h2>
+                        <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Contato</h2>
                     </div>
                 </div>
             </div>
             <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">          
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="contact-block">
-                        <h2>Contact Form</h2>
+                        <h2>Formulário para contato</h2>
                         <form id="contactForm">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required data-error="Please enter your name">
                                         <div class="help-block with-errors"></div>
                                     </div>                                 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Email" id="email" class="form-control" name="email" required data-error="Please enter your email">
+                                        <input type="text" placeholder="E-mail" id="email" class="form-control" name="email" required data-error="Please enter your email">
                                         <div class="help-block with-errors"></div>
                                     </div> 
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Subject" id="msg_subject" class="form-control" required data-error="Please enter your subject">
+                                        <input type="text" placeholder="Assunto" id="msg_subject" class="form-control" required data-error="Please enter your subject">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group"> 
-                                        <textarea class="form-control" id="message" placeholder="Your Message" rows="5" data-error="Write your message" required></textarea>
+                                        <textarea class="form-control" id="message" placeholder="Sua mensagem" rows="5" data-error="Write your message" required></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="submit-button">
-                                        <button class="btn btn-common" id="form-submit" type="submit">Send Message</button>
+                                        <button class="btn btn-common" id="form-submit" type="submit">Enviar</button>
                                         <div id="msgSubmit" class="h3 text-center hidden"></div> 
                                         <div class="clearfix"></div> 
                                     </div>
@@ -385,13 +385,13 @@
                 </div>
                 <div class="col-md-6 col-lg-6 col-sm-12">
                     <div class="contact-right-area wow fadeIn">
-                        <h2>Get In Touch</h2>
+                        <h2>Entrar em contato</h2>
                         <div class="contact-right">
                             <div class="single-contact">
                                 <div class="contact-icon">
                                     <i class="lni-map-marker"></i>
                                 </div>
-                                <p>Skopje, Macedonia</p>
+                                <p>Pelotas, Rio Grande do Sul</p>
                             </div>
                             <div class="single-contact">
                                 <div class="contact-icon">
@@ -404,8 +404,8 @@
                                 <div class="contact-icon">
                                     <i class="lni-phone-handset"></i>
                                 </div>
-                                <p><a href="#">+42 374 5967</a></p>
-                                <p><a href="#">+99 123 5967</a></p>
+                                <p><a href="#">+42 3740 5967</a></p>
+                                <p><a href="#">+99 1231 5967</a></p>
                             </div>
                         </div>
                     </div>
@@ -421,34 +421,31 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="footer-logo mb-3">
-                            <img src="assets/img/logo.png" alt="">
-                        </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam excepturi quasi, ipsam voluptatem.</p>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.4s">
-                        <h3 class="footer-titel">Company</h3>
+                        <h3 class="footer-titel">Empresa</h3>
                         <ul>
-                            <li><a href="#">Press Releases</a></li>
-                            <li><a href="#">Mission</a></li>
-                            <li><a href="#">Strategy</a></li>
+                            <li><a href="">Comunicados de Imprensa</a></li>
+                            <li><a href="">Missão</a></li>
+                            <li><a href="">Strategy</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.6s">
-                        <h3 class="footer-titel">About</h3>
+                        <h3 class="footer-titel">Sobre</h3>
                         <ul>
-                            <li><a href="#">Career</a></li>
-                            <li><a href="#">Team</a></li>
-                            <li><a href="#">Clients</a></li>
+                            <li><a href="">Carreira</a></li>
+                            <li><a href="">Equipe</a></li>
+                            <li><a href="">Clientes</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.8s">
-                        <h3 class="footer-titel">Find us on</h3>
+                        <h3 class="footer-titel">Encontrar-nos no</h3>
                         <div class="social-icon">
-                            <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
-                            <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
-                            <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
-                            <a class="linkedin" href="#"><i class="lni-linkedin-filled"></i></a>
+                            <a class="facebook" target="" href="https://www.facebook.com/"><i class="lni-facebook-filled"></i></a>
+                            <a class="twitter" href="https://twitter.com/?lang=pt-br"><i class="lni-twitter-filled"></i></a>
+                            <a class="instagram" href="https://www.instagram.com/?hl=pt-br"><i class="lni-instagram-filled"></i></a>
+                            <a class="linkedin" href="https://br.linkedin.com/"><i class="lni-linkedin-filled"></i></a>
                         </div>
                     </div>
                 </div>

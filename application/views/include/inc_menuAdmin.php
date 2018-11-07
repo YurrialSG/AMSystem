@@ -53,14 +53,14 @@
 <div class="col-sm-2">
     <ul class="menu">
         <li><a class="active" href="<?= base_url('admin/pagina') ?>">Home</a></li>
-        <li><a href="<?= base_url('produtos') ?>">Empresas</a></li>
-        <li><a href="<?= base_url('categorias') ?>">Funcionários</a></li>
-        <li><a href="<?= base_url('marcas') ?>">Setores</a></li>
-        <li><a href="<?= base_url('pais') ?>">Acidentes</a></li>
-        <li><a href="<?= base_url('estado') ?>">Usuários</a></li>
+        <li><a href="<?= base_url('empresa') ?>">Empresa</a></li>
+        <li><a href="<?= base_url('funcionario') ?>">Funcionários</a></li>
+        <li><a href="<?= base_url('setor') ?>">Setores</a></li>
+        <li><a href="<?= base_url('acidente') ?>">Acidentes</a></li>
+        <li><a href="<?= base_url('mensagem') ?>">Mensagens</a></li>
         <li><a href="<?= base_url('nrs') ?>">NR's</a></li>
         <!--<li class="disabilitar"><a href="<? base_url('itensVenda') ?>">NR's</a></li>-->
-        <li><a href="<?= base_url('anexos') ?>">Anexos</a></li>
-        <li><a href="<?= base_url('usuarios/usuariosAdmin') ?>">Usuários Admin</a></li>
+        <!--<li><a href="<? base_url('anexos') ?>">Anexos</a></li>-->
+        <li><a href="<?= base_url('usuarios/usuariosAdmin') ?>">Usuários</a></li>
     </ul>
 </div>

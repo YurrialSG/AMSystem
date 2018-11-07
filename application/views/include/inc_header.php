@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
     <meta charset="utf-8">
     <title>AMSystem</title>
-    <link rel="icon" href="<?= base_url('icon/AMSystem4.ico') ?>">
+    <link rel="icon" href="<?= base_url('icon/AMSystem.png') ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?= base_url('bootstrap/css/bootstrap.min.css') ?>">
     <script src="<?= base_url('bootstrap/js/jquery/1.12.4/jquery.min.js') ?>"></script>

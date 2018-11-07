@@ -30,7 +30,8 @@ if ($this->session->has_userdata('mensa')) {
     } else {
         ?>
                 swal("Sucesso", "<?= $mensa ?>", "success");
-    <?php }
+        <?php
+    }
 }
 ?>
     });
@@ -40,33 +41,30 @@ if ($this->session->has_userdata('mensa')) {
     <div class="col-sm-10" style="background-color: white; margin-left: 200px; margin-top: -20px;">
 
         <div class="row">
-            <form role="form" method="post" action="<?= base_url('usuarios/incluirUserLogado') ?>">
-                <h3>Cadastrar <small>Usuários</small></h3>
+            <form role="form" method="post" action="<?= base_url('setor/grava_alteracao') ?>">
+                <input type="hidden" name="id" value="<?= $setores->id ?>">
+                <h3>Alterar <small>Setor</small></h3>
                 <hr class="colorgraph">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-7">
-                        <div class="form-group">
-                            <input type="text" name="nome" id="display_name" class="form-control input-group-lg" placeholder="Nome" tabindex="3" required autofocus>
-                        </div>
-                    </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-group-lg" placeholder="E-mail" required tabindex="4">
+                            <input type="text" name="nome" id="nome" value="<?= $setores->nome ?>" class="form-control input-group-lg" placeholder="Nome" tabindex="3" required autofocus>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="form-group">
-                            <input type="password" name="senha" id="password" class="form-control input-group-lg" placeholder="Senha" required tabindex="5">
-                        </div>
+                        <select name="idEmpresa" id="idEmpresa" class="form-control" required style="width: 100%;">
+                            <option value=""> Selecione a empresa... </option>
+                            <?php foreach ($empresas as $empresa) { ?>
+                                <option value="<?= $empresa->id ?>" <?= $empresa->id == $setores->idEmpresa ? 'selected' : '' ?> > <?= $empresa->nome ?> </option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
                 <hr class="colorgraph">
                 <div class="row">
-                    <div class="col-xs-12 col-md-3"><input type="submit" value="Cadastrar" class="btn btn-primary btn-block btn-circle btn-group-sm" tabindex="7"></div>
+                    <div class="col-xs-12 col-md-3"><input type="submit" value="Alterar" class="btn btn-warning btn-block btn-circle btn-group-sm" tabindex="7"></div>
                     <div class="col-xs-12 col-md-7"></div>
-                    <div class="col-xs-12 col-md-2"><a href="<?= base_url('usuarios/usuariosAdmin') ?>" class="btn btn-default btn-block btn-circle btn-group-sm">Voltar</a></div>
+                    <div class="col-xs-12 col-md-2"><a href="<?= base_url('setor') ?>" class="btn btn-default btn-block btn-circle btn-group-sm">Voltar</a></div>
                 </div>
             </form>
         </div>

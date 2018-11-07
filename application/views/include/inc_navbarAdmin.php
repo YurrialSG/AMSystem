@@ -7,7 +7,9 @@
 
     #icon{
         padding: 1px;
-        width: 60px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 80%;
         height: 50px;
     }
     
@@ -20,11 +22,10 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
-            <img src="<?= base_url('icon/AMSystem4.ico') ?>" id="icon">
+            <a href="<?= base_url('usuarios') ?>">
+            <img src="<?= base_url('assets/img/AMSystem.png') ?>"  id="icon">
+            </a>
         </ul>
-        <div class="navbar-header">
-            <a class="navbar-brand" href="<?= base_url('usuarios') ?>" style="font-family: fantasy; margin-left: 0px;">AMSystem</a>
-        </div>
         <ul class="nav navbar-nav">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Relatórios <span class="caret"></span></a>

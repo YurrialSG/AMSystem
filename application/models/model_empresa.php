@@ -4,7 +4,7 @@ class model_empresa extends CI_Model {
 
     public function select() {
         $this->db->order_by('nome');
-        return $this->db->get('usuario')->result();
+        return $this->db->get('empresa')->result();
     }
 
     public function insert($razaoSocial, $nome, $cnpj, $status) {
