@@ -3,8 +3,8 @@
 class model_endereco extends CI_Model {
 
     public function select() {
-        $this->db->order_by('nome');
-        return $this->db->get('usuario')->result();
+        $this->db->order_by('logradouro');
+        return $this->db->get('endereco')->result();
     }
 
     public function insert($logradouro, $numero, $complemento, $cep, $bairro, $idCidade, $status) {

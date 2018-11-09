@@ -12,7 +12,8 @@ if ($this->session->has_userdata('mensa')) {
     } else {
         ?>
                 swal("Sucesso", "<?= $mensa ?>", "success");
-    <?php }
+        <?php
+    }
 }
 ?>
     });
@@ -30,6 +31,10 @@ if ($this->session->has_userdata('mensa')) {
             </div>
         </div>
         <br />
+        <div>
+            <span class="badge badge-pill badge-secondary">Lista de Usuários</span>
+        </div>
+        <br />
         <table class="table table-hover" style="text-align: center;">
             <thead>
                 <tr>
@@ -42,7 +47,7 @@ if ($this->session->has_userdata('mensa')) {
                 </tr>
             </thead>
             <tbody>
-<?php foreach ($usuarios as $usuario) { ?>
+                <?php foreach ($usuarios as $usuario) { ?>
                     <tr>
                         <td><?= $usuario->id ?></td>
                         <td><?= $usuario->nome ?></td>
@@ -57,7 +62,7 @@ if ($this->session->has_userdata('mensa')) {
                                 <span class="glyphicon glyphicon-user"></span>  
                             <?php } else { ?>
                                 <span class="glyphicon glyphicon-lock"></span>              
-    <?php } ?>
+                            <?php } ?>
                         </td>
                         <td>
                             <a href="<?= base_url('usuarios/alterar/' . $usuario->id) ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
@@ -65,7 +70,7 @@ if ($this->session->has_userdata('mensa')) {
                             <a href="<?= base_url('usuarios/deletar/' . $usuario->id) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Confirma exclusão do usuário \' <?= $usuario->nome ?> \' ?')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                         </td>
                     </tr>
-<?php } ?>
+                <?php } ?>
             </tbody>
         </table>
         <br />

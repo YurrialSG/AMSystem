@@ -7,10 +7,10 @@ USE projetointegrador;
 -- 1
 CREATE TABLE empresa (
   id INT NOT NULL AUTO_INCREMENT,
-  razaoSocial varchar(50) NOT NULL,
+  razaoSocial varchar(100) NOT NULL,
   nome varchar(50) NOT NULL,
   cnpj varchar(50) NOT NULL,
-  foto varchar(50) NOT NULL,
+  foto varchar(50),
   status int NOT NULL,
   PRIMARY KEY(id)
 );
@@ -148,13 +148,8 @@ CREATE TABLE usuario (
   email varchar(50) NOT NULL,
   senha varchar(50) NOT NULL,
   hashTemporaria varchar(92) DEFAULT NULL,
-  idEmpresa int,
   idEndereco int,
   status int NOT NULL,
-
-  CONSTRAINT FK_usuario_empresa
-  FOREIGN KEY (idEmpresa)
-  REFERENCES empresa(id),
 
   CONSTRAINT FK_usuario_endereco
   FOREIGN KEY (idEndereco)
@@ -164,25 +159,43 @@ CREATE TABLE usuario (
 );
 
 
-INSERT INTO usuario (nome, email, senha, status) VALUES 
-("Caio Francisco Lopes", "caio@gmail.com",(MD5("Caio@123")),2),
-("Administrador", "admin@gmail.com",(MD5("Admin@123")),2),
-("Funcionario", "funcionario@gmail.com",(MD5("Funcionario@123")),1),
-("Jeferson Luiz dos Santos Silva", "jefinho_silva@hotmail.com",(MD5("Jeferson@123")),1),
-("Roberto Weslley", "roberto@hotmail.com",(MD5("Roberto@123")),1),
-("Daiana Karine Rolim Caula", "daiana@bol.com.br",(MD5("Daiana@123")),1),
-("Juliana Silva Sousa", "juliana@gmail.com",(MD5("Juliana@123")),1),
-("Gilberto Alves da Cruz", "gilberto@outlook.com",(MD5("Gilberto@123")),1),
-("Italo Aguiar Freire", "italo@outlook.com",(MD5("Italo@123")),0),
-("Maria Renata Silveira", "maria@outlook.com",(MD5("Maria@123")),0),
-("Paloma de Oliveira Gomes", "paloma@hotmail.com",(MD5("Paloma@123")),0),
-("Everton Alencar Moura", "everton@hotmail.com",(MD5("Everton@123")),0),
-("Diego Kedson dos Santos", "diego@hotmail.com",(MD5("Diego@123")),0),
-("Irene Barbosa Gondim", "irene@gmail.com",(MD5("Irene@123")),0),
-("Ana Neyla Martins da Mota", "ana@gmail.com",(MD5("Ana@123")),0),
-("Allyson Bezerra de Oliveira", "allyson@outlook.com",(MD5("Allyson@123")),0),
-("Emmanuel Alves de Melo", "emmanuelalves@outlook.com",(MD5("Emmanuel@123")),0),
-("Marcelo Silva Costa", "marcelinho@gmail.com",(MD5("Marcelo@123")),1),
-("Joaquim da Silva", "joaquim@hotmail.com",(MD5("Joaquim@123")),1),
-("Vinicius Lima Angelo", "vinicius@gmail.com",(MD5("Vinicius@123")),1),
-("Yuri Goncalves da Silveira", "yuriinternacional86@gmail.com",(MD5("Yuri@123")),0);
+CREATE TABLE user_has_empresa (
+idEmpresa INT NOT NULL,
+idUsuario INT NOT NULL,
+
+CONSTRAINT fk_user_empresa
+    FOREIGN KEY (idEmpresa)
+    REFERENCES empresa (id),
+
+    CONSTRAINT fk_user_usuario
+    FOREIGN KEY (idUsuario)
+    REFERENCES usuario (id)
+);
+
+INSERT INTO estado (sigla) VALUES
+('RS');
+
+INSERT INTO cidade (nome, idEstado) VALUES
+('Pelotas', 1);
+
+INSERT INTO empresa (razaoSocial, nome, cnpj, foto, status) VALUES
+('Macro Atacado Treichel LTDA 1', 'Macro Atacado Treichel 1', '03.204.565/0001-89', 'd272e06c5af2a380c10c05cd8ccec0b4.png', 1),
+('Macro Atacado Treichel LTDA 2', 'Macro Atacado Treichel 2', '03.204.565/0001-89', NULL, 1),
+('Macro Atacado Treichel LTDA 3', 'Macro Atacado Treichel 3', '03.204.565/0001-89', NULL, 1),
+('Macro Atacado Treichel LTDA 4', 'Macro Atacado Treichel 4', '03.204.565/0001-89', NULL, 1),
+('Macro Atacado Treichel LTDA 5', 'Macro Atacado Treichel 5', '03.204.565/0001-89', NULL, 1);
+
+INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, idCidade, status) VALUES
+('Rua Montenegro', 111, '', '96090-420', 'Laranjal', 1, 1),
+('Rua Dr. Claudio Manoel de Costa', 8721, 202, '96080-080', 'Areal', 1, 1);
+
+INSERT INTO usuario (nome, email, senha, idEndereco, status) VALUES
+('Administrador', 'admin@gmail.com', (MD5("Admin@123")), 1, 2),
+('Administrador 2', 'admin2@gmail.com', (MD5("Admin2@123")), 2, 2);
+
+INSERT INTO user_has_empresa (idEmpresa, idUsuario) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 2),
+(5, 2);

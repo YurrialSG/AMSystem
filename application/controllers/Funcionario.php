@@ -2,12 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Setor extends CI_Controller {
+class Funcionario extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('model_setor', 'setoresM');
+        $this->load->model('model_funcionario', 'funcionariosM');
         $this->load->model('model_empresa', 'empresasM');
+        $this->load->model('model_endereco', 'enderecosM');
+        $this->load->model('model_setor', 'setoresM');
     }
 
     public function verica_sessao() {
@@ -18,31 +20,35 @@ class Setor extends CI_Controller {
 
     public function index() {
         $this->verica_sessao();
-        redirect(base_url('setor/pagina'));
+        redirect(base_url('funcionario/pagina'));
     }
 
     public function pagina() {
         $this->verica_sessao();
-        $dados['setores'] = $this->setoresM->select();
+        $dados['funcionarios'] = $this->funcionariosM->select();
         $dados['empresas'] = $this->empresasM->select($this->session->id);
+        $dados['setores'] = $this->setoresM->select();
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('manut_setores', $dados);
+        $this->load->view('manut_funcionarios', $dados);
     }
 
-    public function open_new_setores() {
-        $dados['empresas'] = $this->empresasM->select($this->session->id);
+    public function open_new_funcionarios() {
+        $dados['empresas'] = $this->empresasM->find($this->session->id);
+        $dados['setores'] = $this->setoresM->select();
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('crud/cad_setor', $dados);
+        $this->load->view('crud/cad_funcionario', $dados);
     }
 
     public function incluir() {
         $dados = $this->input->post();
+        $data = $this->input->post('dataNascimento');
+        $dados['dataNascimento'] = date('Y-m-d', strtotime($data));
         $dados['status'] = 1;
-        $realizou = $this->setoresM->insert($dados);
+        $realizou = $this->funcionariosM->insert($dados);
 
         if ($realizou) {
             $tipo = "1";
@@ -54,11 +60,11 @@ class Setor extends CI_Controller {
         $this->session->set_flashdata('tipo', $tipo);
         $this->session->set_flashdata('mensa', $mensa);
 
-        redirect(base_url('setor/open_new_setores'));
+        redirect(base_url('funcionario/pagina'));
     }
 
     public function alterar($id) {
-        $dados['empresas'] = $this->empresasM->select($this->session->id);
+        $dados['empresas'] = $this->empresasM->select();
         $this->db->where('id', $id);
         $dados['setores'] = $this->db->get('setor')->row();
         $this->load->view('include/inc_header.php');

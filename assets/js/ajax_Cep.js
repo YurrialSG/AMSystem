@@ -20,6 +20,12 @@ $(document).ready(function () {
                     $('#validation').html('');
                     $("#numero").focus();
                 }else{
+                    $("#logradouro").val("");
+                    $("#bairro").val("");
+                    $("#cidade").val("");
+                    $("#estado").val("");
+                    $("#numero").val("");
+                    $("#complemento").val("");
                     $("#cep").val("");        
                     $("#cep").focus(); 
                     $('#validation').html('Cep informado não é válido.');

@@ -28,11 +28,18 @@ class Empresa extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-
+        $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('manut_empresa');
+        $this->load->view('manut_empresa', $dados);
+    }
+
+    public function open_new_empresas() {
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('crud/cad_empresa');
     }
 
 }

@@ -157,15 +157,12 @@ class Usuarios extends CI_Controller {
         $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $status);
 
 //inserindo Endereço do usuário logado
-        if ($this->usuariosM->updateEndereco($this->session->id, $idEndereco) &&
-                $this->usuariosM->updateEmpresa($this->session->id, $idEmpresa)) {
-            if ($this->usuariosM->updateStatus($this->session->id)) {
-                $tipo = "1";
-                $mensa .= "Dados cadastrados com sucesso.";
-                $this->session->set_flashdata('tipo', $tipo);
-                $this->session->set_flashdata('mensa', $mensa);
-                $this->load->view(redirect('admin/pagina'));
-            }
+        if ($this->usuariosM->updateDadosUser($this->session->id, $idEndereco, $idEmpresa)) {
+            $tipo = "1";
+            $mensa .= "Dados cadastrados com sucesso.";
+            $this->session->set_flashdata('tipo', $tipo);
+            $this->session->set_flashdata('mensa', $mensa);
+            $this->load->view(redirect('admin/pagina'));
         } else {
             $tipo = "0";
             $mensa .= "Erro no cadastro das informações.";
