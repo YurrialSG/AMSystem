@@ -28,10 +28,9 @@ class model_usuario extends CI_Model {
         return $this->db->affected_rows();
     }
 
-    public function updateDadosUser($pegaID, $idEndereco, $idEmpresa) {
+    public function updateDadosUser($pegaID, $idEndereco) {
         $sql = "UPDATE usuario SET "
                 . "idEndereco = '$idEndereco', "
-                . "idEmpresa = '$idEmpresa', "
                 . "status = 2 "
                 . "WHERE id = '$pegaID'";
         $this->db->query($sql);

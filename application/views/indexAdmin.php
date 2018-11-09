@@ -5,13 +5,14 @@
 <?php
 if ($this->session->has_userdata('mensa')) {
     $mensa = $this->session->flashdata('mensa');
+    $nomeUsuario = $this->session->flashdata('nomeUsuario');
     if ($this->session->flashdata('tipo') == '0') {
         ?>
                 swal("Erro", "<?= $mensa ?>", "error");
         <?php
     } else {
         ?>
-                swal("Sucesso", "<?= $mensa ?>", "success");
+                swal("Bem Vindo(a)", "<?= $nomeUsuario ?>", "success");
     <?php }
 } ?>
     });

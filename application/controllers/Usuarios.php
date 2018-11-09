@@ -7,6 +7,7 @@ class Usuarios extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('model_usuario', 'usuariosM');
+        $this->load->model('model_user_has_empresa', 'userEmpresasM');
         $this->load->model('model_endereco', 'enderecosM');
         $this->load->model('model_empresa', 'empresasM');
         $this->load->model('model_estado', 'estadosM');
@@ -156,12 +157,16 @@ class Usuarios extends CI_Controller {
         $cnpj = $this->input->post('cnpj');
         $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $status);
 
-//inserindo Endereço do usuário logado
-        if ($this->usuariosM->updateDadosUser($this->session->id, $idEndereco, $idEmpresa)) {
+        $this->userEmpresasM->insert($this->session->id, $idEmpresa);
+
+        //inserindo Endereço do usuário logado
+        if ($this->usuariosM->updateDadosUser($this->session->id, $idEndereco)) {
             $tipo = "1";
-            $mensa .= "Dados cadastrados com sucesso.";
+            $mensa .= " ";
+            $nomeUsuario = $this->session->nome;
             $this->session->set_flashdata('tipo', $tipo);
             $this->session->set_flashdata('mensa', $mensa);
+            $this->session->set_flashdata('nomeUsuario', $nomeUsuario);
             $this->load->view(redirect('admin/pagina'));
         } else {
             $tipo = "0";
@@ -203,6 +208,7 @@ class Usuarios extends CI_Controller {
             $verifica = $this->usuariosM->verificaUsuario($email, $senha);
 
             if (isset($verifica)) {
+                $sessao['email'] = $verifica->email;
                 $sessao['nome'] = $verifica->nome;
                 $sessao['id'] = $verifica->id;
                 $sessao['status'] = $verifica->status;
@@ -228,6 +234,14 @@ class Usuarios extends CI_Controller {
     public function sair() {
         $this->session->sess_destroy();
         redirect();
+    }
+
+    public function dados() {
+        $dados['empresas'] = $this->empresasM->select($this->session->id);
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('manut_usuario', $dados);
     }
 
 }
