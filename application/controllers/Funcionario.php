@@ -27,7 +27,7 @@ class Funcionario extends CI_Controller {
         $this->verica_sessao();
         $dados['funcionarios'] = $this->funcionariosM->select();
         $dados['empresas'] = $this->empresasM->select($this->session->id);
-        $dados['setores'] = $this->setoresM->select();
+        $dados['setores'] = $this->setoresM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');

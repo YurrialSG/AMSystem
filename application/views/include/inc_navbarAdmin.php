@@ -41,7 +41,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navBar">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
-            <a href="<?= base_url('usuarios') ?>">
+            <a href="<?= base_url('admin/pagina') ?>">
                 <img src="<?= base_url('assets/img/AMSystem.png') ?>"  id="icon">
             </a> 
         </ul>

@@ -23,9 +23,15 @@
         width: 80%;
         height: 50px;
     }
+
+    #navBar {
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+    }
 </style>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="navBar">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-left">
             <a href="<?= base_url('usuarios') ?>">

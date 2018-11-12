@@ -23,7 +23,7 @@ class Setor extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-        $dados['setores'] = $this->setoresM->select();
+        $dados['setores'] = $this->setoresM->select($this->session->id);
         $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');

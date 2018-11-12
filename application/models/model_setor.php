@@ -2,9 +2,14 @@
 
 class model_setor extends CI_Model {
 
-    public function select() {
-        $this->db->order_by('nome');
-        return $this->db->get('setor')->result();
+    public function select($idUser) {
+        $sql = "select s.* from setor as s ";
+        $sql .= "inner join empresa as e on e.id = s.idEmpresa ";
+        $sql .= "inner join user_has_empresa as u on u.idEmpresa = e.id ";
+        $sql .= "inner join usuario as o on o.id = u.idUsuario ";
+        $sql .= "where u.idUsuario = $idUser ";
+        $sql .= "group by s.nome";
+        return $this->db->query($sql)->result();
     }
 
     public function insert($dados) {
