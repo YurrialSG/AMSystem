@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 
 <body>
-    <div class="col-sm-10" style="background-color: white; margin-left: 200px; margin-top: -20px;">
+    <div class="col-sm-10" style="margin-left: 200px; margin-top: -20px;">
         <br />
         <div class="limiter">
             <div class="container-table100">

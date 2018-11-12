@@ -36,6 +36,10 @@
     li a:hover {
         background-color: #555;
         color: white;
+        text-decoration: none;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+        -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
     }
 
     li a.active {

@@ -22,4 +22,12 @@ class model_funcionario extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function totalReg($id) {
+        $sql = "SELECT COUNT(funcionario.id) as total from funcionario ";
+        $sql.= "INNER JOIN user_has_empresa ON funcionario.idEmpresa = user_has_empresa.idEmpresa ";
+        $sql.= "INNER JOIN usuario ON user_has_empresa.idUsuario = usuario.id ";
+        $sql .= "where usuario.id = $id ";
+        return $this->db->query($sql)->result();
+    }
+
 }

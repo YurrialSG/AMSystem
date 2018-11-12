@@ -15,8 +15,6 @@
 
     }
 </style>
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -52,7 +50,7 @@ if ($this->session->has_userdata('mensa')) {
 </script>
 
 <div class="container">
-    <div class="col-sm-10" style="background-color: white; margin-left: 200px; margin-top: -20px;">
+    <div class="col-sm-10" style="margin-left: 200px; margin-top: -20px;">
 
         <div class="row">
             <form role="form" method="post" action="<?= base_url('funcionario/incluir') ?>">
@@ -151,19 +149,19 @@ if ($this->session->has_userdata('mensa')) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-5">
                         <select name="idEmpresa" id="idEmpresa" class="form-control" required style="width: 100%;">
-                            <option value=""> Selecione a empresa... </option>
+                            <option value="">Selecione a empresa...</option>
                             <?php foreach ($empresas as $empresa) { ?>
-                                <option value="<?= $empresa->idEmpresa ?>"> <?= $empresa->nome ?> </option>
+                                <option value="<?= $empresa->id ?>"> <?= $empresa->nome ?> </option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <select name="idSetor" id="idSetor" class="form-control" required style="width: 100%;">
                             <option value=""> Selecione o setor... </option>
-                            <?php foreach ($setores as $setor) { ?>
-                                <option value="<?= $setor->id ?>"> <?= $setor->nome ?> </option>
-                            <?php } ?>
                         </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3" id="validaSetor" style="display: none;">
+                        <span class="badge badge-warning">Setor não encontrado...</span>
                     </div>
                 </div>
                 <hr class="colorgraph">
@@ -176,3 +174,35 @@ if ($this->session->has_userdata('mensa')) {
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#idSetor').attr("disabled", true);
+        $('#idEmpresa').on('change', function () {
+            $('#validaSetor').css("display", "none");
+            var idEmpresa = $(this).val();
+            if (idEmpresa === '') {
+                $('#idSetor').attr("disabled", true);
+            } else {
+                $('#idSetor').attr('disabled', false);
+                $.ajax({
+                    url: "http://localhost/AMSystem/funcionario/getSetores",
+                    type: 'POST',
+                    data: {'idEmpresa': idEmpresa},
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#idSetor').html(data);
+                    },
+                    error: function (error) {
+                        alert(error.toString());
+                        $('#idSetor').attr("disabled", true);
+                        $('#validaSetor').css("display", "block");
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

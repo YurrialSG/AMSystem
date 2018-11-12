@@ -37,6 +37,14 @@ class model_empresa extends CI_Model {
         $sql .= "inner join empresa as e on u.idEmpresa = e.id ";
         $sql .= "where idUsuario = $id ";
         $sql .= "group by e.nome";
+        $this->db->query($sql)->result();
+    }
+
+    public function totalReg($id) {
+        $sql = "SELECT COUNT(usuario.id) as total from usuario ";
+        $sql .= "INNER JOIN user_has_empresa ";
+        $sql .= "ON usuario.id = user_has_empresa.idUsuario ";
+        $sql .= "where usuario.id = $id ";
         return $this->db->query($sql)->result();
     }
 

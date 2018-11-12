@@ -2,14 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Funcionario extends CI_Controller {
+class Acidente extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('model_funcionario', 'funcionariosM');
+        $this->load->model('model_acidente', 'acidentesM');
         $this->load->model('model_empresa', 'empresasM');
-        $this->load->model('model_endereco', 'enderecosM');
-        $this->load->model('model_setor', 'setoresM');
     }
 
     public function verica_sessao() {
@@ -20,48 +18,46 @@ class Funcionario extends CI_Controller {
 
     public function index() {
         $this->verica_sessao();
-        redirect(base_url('funcionario/pagina'));
+        redirect(base_url('acidente/pagina'));
     }
 
     public function pagina() {
         $this->verica_sessao();
-        $dados['funcionarios'] = $this->funcionariosM->select();
-        $dados['empresas'] = $this->empresasM->select($this->session->id);
-        $dados['setores'] = $this->setoresM->select();
-        $this->load->view('include/inc_header.php');
-        $this->load->view('include/inc_navbarAdmin.php');
-        $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('manut_funcionarios', $dados);
-    }
-
-    public function open_new_funcionarios() {
+        $dados['acidentes'] = "";
         $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('crud/cad_funcionario', $dados);
+        $this->load->view('manut_acidentes', $dados);
     }
 
-    public function getSetores() {
+    public function open_registros() {
         $idEmpresa = $this->input->post('idEmpresa');
-        print "<script type=\"text/javascript\">alert('Some text');</script>";
-        $nomeSetores = $this->setoresM->findNome($this->session->id, $idEmpresa);
-        if (count($nomeSetores) > 0) {
-            $set_select_box = '';
-            $set_select_box .= '<option value="">Selecionar Setor</option>';
-            foreach ($nomeSetores as $setor) {
-                $set_select_box .='<option value="' . $setor->id . '">' . $setor->nome . '</option>';
-            }
-            echo json_encode($set_select_box);
+        $realizou = $dados['acidentes'] = $this->acidentesM->select($this->session->id, $idEmpresa);
+        if ($realizou) {
+            $tipo = "1";
+            $mensa .= "Busca foi realizada com sucesso!";
+        } else {
+            $tipo = "0";
+            $mensa .= "Busca não foi realizada.";
         }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+        redirect(base_url('acidente/pagina'));
+    }
+
+    public function open_new_setores() {
+        $dados['empresas'] = $this->empresasM->select($this->session->id);
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('crud/cad_setor', $dados);
     }
 
     public function incluir() {
         $dados = $this->input->post();
-        $data = $this->input->post('dataNascimento');
-        $dados['dataNascimento'] = date('Y-m-d', strtotime($data));
         $dados['status'] = 1;
-        $realizou = $this->funcionariosM->insert($dados);
+        $realizou = $this->setoresM->insert($dados);
 
         if ($realizou) {
             $tipo = "1";
@@ -73,11 +69,11 @@ class Funcionario extends CI_Controller {
         $this->session->set_flashdata('tipo', $tipo);
         $this->session->set_flashdata('mensa', $mensa);
 
-        redirect(base_url('funcionario/pagina'));
+        redirect(base_url('setor/open_new_setores'));
     }
 
     public function alterar($id) {
-        $dados['empresas'] = $this->empresasM->select();
+        $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->db->where('id', $id);
         $dados['setores'] = $this->db->get('setor')->row();
         $this->load->view('include/inc_header.php');

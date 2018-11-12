@@ -38,7 +38,7 @@ if ($this->session->has_userdata('mensa')) {
 </script>
 
 <div class="container">
-    <div class="col-sm-10" style="background-color: white; margin-left: 200px; margin-top: -20px;">
+    <div class="col-sm-10" style="margin-left: 200px; margin-top: -20px;">
 
         <div class="row">
             <form role="form" method="post" action="<?= base_url('usuarios/grava_alteracao') ?>">
