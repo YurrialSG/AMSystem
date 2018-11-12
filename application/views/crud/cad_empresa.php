@@ -83,7 +83,7 @@ if ($this->session->has_userdata('mensa')) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-7">
                         <div class="form-group">
-                            <input type="text" name="razaoSocial" id="display_name" class="form-control input-group-lg" placeholder="Razão Social" tabindex="3" required autofocus>
+                            <input type="text" name="razaoSocial" id="razaoSocial" class="form-control input-group-lg" placeholder="Razão Social" tabindex="3" required autofocus>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-5">
@@ -95,7 +95,7 @@ if ($this->session->has_userdata('mensa')) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-5">
                         <div class="form-group">
-                            <input type="text" name="nome" id="dataNascimento" class="form-control input-group-lg" placeholder="Nome" tabindex="3" required>
+                            <input type="text" name="nome" id="nome" class="form-control input-group-lg" placeholder="Nome" tabindex="3" required>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ if ($this->session->has_userdata('mensa')) {
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*" onchange="loadFile(event)">
+                                <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="loadFile(event)">
                                 <span class="input-group-btn">
                                     <button class="btn btn-warning btn-reset" onclick="resetFile()" type="button">Limpar</button>
                                 </span>
@@ -122,7 +122,7 @@ if ($this->session->has_userdata('mensa')) {
                                     output.style.display = 'block';
                                 };
                                 function resetFile() {
-                                    var imagem = document.getElementById('imagem');
+                                    var imagem = document.getElementById('foto');
                                     var output = document.getElementById('output');
                                     output.style.display = 'none';
                                     imagem.value = "";
