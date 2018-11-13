@@ -39,7 +39,6 @@ if ($this->session->has_userdata('mensa')) {
             <table class="table table-hover" style="text-align: center;">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Setor</th>
                         <th>Empresa</th>
                         <th>Ações</th>
@@ -48,7 +47,6 @@ if ($this->session->has_userdata('mensa')) {
                 <tbody>
                     <?php foreach ($setores as $setor) { ?>
                         <tr>
-                            <td><?= $setor->id ?></td>
                             <td><?= $setor->nome ?></td>
                             <?php
                             foreach ($empresas as $empresa) {

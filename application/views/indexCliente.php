@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="img-thumb text-center wow fadeInUp" data-wow-delay="0.6s">
-                            <img class="img-fluid" src="assets/img/hero-1.png" alt="">
+                            <img class="img-fluid" src="assets/img/telaInicial.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Empresa</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Possibilidade de cadastrar informações de diversas empresas na qual você trabalha em um só lugar. Sistema limpo e visual para todos os tipos de empresas.</p>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Funcionários</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Registro de funcionários, juntamente com seu setor a função desempenhada, tendo a possibilidade de alteração e exclusão caso for necessário.</p>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Acidentes</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Acidentes registrados são atrelados ao funcionário que sofreu o acidente, em sintonia com o tipo de risco, o registro da medição realiadas, entre outros fatores.</p>
                         </div>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Mensagens</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Com muita facilidade é possivel registras mensagens de atividades e/ou metas futuras que devem ser realizadas, como por exemplo, avisos pessoais ao funcionários ou treinamentos a serem realizados.</p>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Normas Regulamentadoras - NR's</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Disponivel o acesso as Normas Regulamentadoras - NR's do Ministerio do Trabalho de forma simples e muito rápida, sendo entre a NR 01 até NR 36. </p>
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="services-content">
                             <h3><a href="#">Setores</a></h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde perspiciatis dicta labore nulla beatae quaerat quia incidunt laborum aspernatur...</p>
+                            <p>Setores são atrelados as empresas, aos funcionários e aos acidentes decorrentes da atividade e do ambiente de trabalho, mediante análise quantitativa ou qualitativa.</p>
                         </div>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="text-wrapper">
                         <div>
-                            <h2 class="title-hl wow fadeInLeft" data-wow-delay="0.3s">Aprenda mais sobre nós</h2>
+                            <h2 class="title-hl wow fadeInLeft" data-wow-delay="0.3s">Mais sobre nós</h2>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="features-box wow fadeInLeft" data-wow-delay="0.3s">
@@ -220,7 +220,7 @@
                                                 Gráficos
                                             </h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
+                                                Relacionados aos acidentes de trabalho decorrentes da função e do ambiente de trabalho. 
                                             </p>
                                         </div>
                                     </div>
@@ -235,7 +235,7 @@
                                                 Relatórios
                                             </h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
+                                                Apresentação de registros possibilitando a impressão dos mesmos quando for necessário. 
                                             </p>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@
                                                 Agilidade
                                             </h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
+                                                Geração em sintonia com os registros atrelados ao sistema e as operações efetuadas.  
                                             </p>
                                         </div>
                                     </div>
@@ -265,7 +265,7 @@
                                                 Segurança
                                             </h4>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora quidem vel sint. 
+                                                Informações registradas somente são acessiveis aos usuários responsavel por tais informações. 
                                             </p>
                                         </div>
                                     </div>
@@ -283,38 +283,6 @@
         </div>
     </div>
     <!-- Feature Section End -->
-
-    <!-- Owl Slider Section Start -->
-    <section class="sloder-img section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="slider-center slider">
-                        <div>
-                            <img class="img-fluid" src="assets/img/slide/img1.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="img-fluid" src="assets/img/slide/img2.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="img-fluid" src="assets/img/slide/img3.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="img-fluid" src="assets/img/slide/img4.jpg" alt="">
-                        </div>
-                        <div>
-                            <img class="img-fluid" src="assets/img/slide/img5.jpg" alt="">
-                        </div>
-                        <div>
-                            <img  class="img-fluid" src="assets/img/slide/img6.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Owl Slider Section End -->  
-
     <!-- Subscribe Section Start -->
     <section id="Subscribes" class="subscribes section-padding">
         <div class="container">
@@ -458,7 +426,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p>Copyright © 2018 UIdeck All Right Reserved</p>
+                    <p>Copyright © 2018 AMSystem - Todos os direitos são reservados.</p>
                 </div>
             </div>
         </div>

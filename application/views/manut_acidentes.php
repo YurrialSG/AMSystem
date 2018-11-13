@@ -7,11 +7,7 @@ if ($this->session->has_userdata('mensa')) {
     $mensa = $this->session->flashdata('mensa');
     if ($this->session->flashdata('tipo') == '0') {
         ?>
-                swal("Erro", "<?= $mensa ?>", "error");
-        <?php
-    } else {
-        ?>
-                swal("Sucesso", "<?= $mensa ?>", "success");
+                swal("Aviso", "<?= $mensa ?>", "info");
         <?php
     }
 }
@@ -52,29 +48,73 @@ if ($this->session->has_userdata('mensa')) {
             </form>
         </div>
         <br />
-        <?php if (count($acidentes) < 0) { ?>
+        <?php if ($acidentes != '') { ?>
             <table class="table table-hover" style="text-align: center;">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Descricao</th>
+                        <th>Descrição</th>
+                        <th>Tipo de Risco</th>
+                        <th>Agente</th>
+                        <th>Medição</th>
+                        <th>Funcionário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($acidentes as $acidente) { ?>
                         <tr>
-                            <td><?= $acidente->id ?></td>
                             <td><?= $acidente->descricao ?></td>
-                    <a href = "<?= base_url('acidente/alterar/' . $acidente->id) ?>" class = "btn btn-warning btn-xs"><span class = "glyphicon glyphicon-pencil" aria-hidden = "true"></span></a>
-                    &nbsp;
-                    <a href = "<?= base_url('acidente/deletar/' . $acidente->id) ?>" class = "btn btn-danger btn-xs" onclick = "return confirm('Confirma exclusão do acidente \' <?= $acidente->descricao ?> \' ?')"><span class = "glyphicon glyphicon-trash" aria-hidden = "true"></span></a>
-                    </td>
-                    </tr>
-                    <?php
-                }
-                ?>
-
+                            <?php
+                            foreach ($infoAci as $info) {
+                                if ($info->id == $acidente->idInfoAcidente) {
+                                    ?>     
+                                    <td><?= $info->tipoDeRisco ?></td>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            foreach ($infoAci as $info) {
+                                if ($info->id == $acidente->idInfoAcidente) {
+                                    ?>     
+                                    <td><?= $info->agente ?></td>
+                                    <?php
+                                }
+                            }
+                            ?>
+                            <?php
+                            foreach ($infoAci as $info) {
+                                if ($info->id == $acidente->idInfoAcidente) {
+                                    if ($info->medicao != null) {
+                                        ?>     
+                                        <td><?= $info->medicao ?></td>
+                                        <?php
+                                    } else {
+                                        ?>     
+                                        <td>QUALITATIVA</td>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                            <?php
+                            foreach ($funcionarios as $funcionario) {
+                                if ($funcionario->id == $acidente->idFuncionario) {
+                                    ?>     
+                                    <td><?= $funcionario->nome ?></td>
+                                    <?php
+                                }
+                            }
+                            ?> 
+                            <td>
+                                <a href = "<?= base_url('acidente/alterar/' . $acidente->id) ?>" class = "btn btn-warning btn-xs"><span class = "glyphicon glyphicon-pencil" aria-hidden = "true"></span></a>
+                                &nbsp;
+                                <a href = "<?= base_url('acidente/deletar/' . $acidente->id) ?>" class = "btn btn-danger btn-xs" onclick = "return confirm('Confirma exclusão do acidente \' <?= $acidente->descricao ?> \' ?')"><span class = "glyphicon glyphicon-trash" aria-hidden = "true"></span></a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         <?php } else { ?>

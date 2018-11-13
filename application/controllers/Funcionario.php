@@ -10,6 +10,7 @@ class Funcionario extends CI_Controller {
         $this->load->model('model_empresa', 'empresasM');
         $this->load->model('model_endereco', 'enderecosM');
         $this->load->model('model_setor', 'setoresM');
+        $this->load->model('model_funcao', 'funcoesM');
     }
 
     public function verica_sessao() {
@@ -25,9 +26,9 @@ class Funcionario extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-        $dados['funcionarios'] = $this->funcionariosM->select();
+        $dados['funcionarios'] = $this->funcionariosM->select($this->session->id);
         $dados['empresas'] = $this->empresasM->select($this->session->id);
-        $dados['setores'] = $this->setoresM->select($this->session->id);
+        $dados['funcoes'] = $this->funcoesM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');

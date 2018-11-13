@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS funcionario (
   telefoneResidencial varchar(50),
   telefoneCelular varchar(50),
   idEndereco int,
-  idSetor int,
+  idFuncao int,
   idEmpresa int,
   status int NOT NULL,
 
@@ -100,9 +100,9 @@ CREATE TABLE IF NOT EXISTS funcionario (
   FOREIGN KEY (idEndereco)
   REFERENCES endereco(id),
 
-  CONSTRAINT FK_funcionario_setor
-  FOREIGN KEY (idSetor)
-  REFERENCES setor(id),
+  CONSTRAINT FK_funcionario_funcao
+  FOREIGN KEY (idFuncao)
+  REFERENCES funcao(id),
 
   CONSTRAINT FK_funcionario_empresa
   FOREIGN KEY (idEmpresa)
@@ -115,33 +115,18 @@ CREATE TABLE IF NOT EXISTS funcionario (
 CREATE TABLE IF NOT EXISTS infoAcidente (
   id int AUTO_INCREMENT,
   tipoDeRisco varchar(50) NOT NULL,
-  local varchar(50) NOT NULL,
-  nivelLesao int,
+  agente varchar(50) NOT NULL,
+  idSetor int,
+  medicao varchar(50) NOT NULL,
+
+  CONSTRAINT FK_infoAcidente_setor
+  FOREIGN KEY (idSetor)
+  REFERENCES setor(id),
 
   PRIMARY KEY(id)
 );
 
--- 9
-CREATE TABLE IF NOT EXISTS acidente (
-  id int AUTO_INCREMENT,
-  descricao varchar(50) NOT NULL,
-  data date NOT NULL,
-  idFuncionario int,
-  idInfoAcidente int,
-  status int NOT NULL,
-
-  CONSTRAINT FK_acidente_funcionario
-  FOREIGN KEY (idFuncionario)
-  REFERENCES funcionario(id),
-
-  CONSTRAINT FK_acidente_infoAcidente
-  FOREIGN KEY (idInfoAcidente)
-  REFERENCES infoAcidente(id),
-
-  PRIMARY KEY(id)
-);
-
--- 10
+-- 09
 CREATE TABLE usuario (
   id INT NOT NULL AUTO_INCREMENT,
   nome varchar(50) NOT NULL,
@@ -154,6 +139,31 @@ CREATE TABLE usuario (
   CONSTRAINT FK_usuario_endereco
   FOREIGN KEY (idEndereco)
   REFERENCES endereco(id),
+
+  PRIMARY KEY(id)
+);
+
+-- 10
+CREATE TABLE IF NOT EXISTS acidente (
+  id int AUTO_INCREMENT,
+  descricao varchar(50) NOT NULL,
+  data date NOT NULL,
+  idFuncionario int,
+  idInfoAcidente int,
+  idEmpresa int,
+  status int NOT NULL,
+
+  CONSTRAINT FK_acidente_funcionario
+  FOREIGN KEY (idFuncionario)
+  REFERENCES funcionario(id),
+
+  CONSTRAINT FK_acidente_infoAcidente
+  FOREIGN KEY (idInfoAcidente)
+  REFERENCES infoAcidente(id),
+
+  CONSTRAINT FK_acidente_empresa
+  FOREIGN KEY (idEmpresa)
+  REFERENCES empresa(id),
 
   PRIMARY KEY(id)
 );
@@ -187,7 +197,10 @@ INSERT INTO empresa (razaoSocial, nome, cnpj, foto, status) VALUES
 
 INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, idCidade, status) VALUES
 ('Rua Montenegro', 111, '', '96090-420', 'Laranjal', 1, 1),
-('Rua Dr. Claudio Manoel de Costa', 8721, 202, '96080-080', 'Areal', 1, 1);
+('Rua Dr. Claudio Manoel de Costa', 8721, 202, '96080-080', 'Areal', 1, 1),
+('Rua Rio Grande do Sul', 111, '', '96090-420', 'Laranjal', 1, 1),
+('Rua Av. Bento Gonçalves', 111, '', '96090-420', 'Centro', 1, 1),
+('Rua Montenegro 2', 111, '', '96090-420', 'Laranjal', 1, 1);
 
 INSERT INTO usuario (nome, email, senha, idEndereco, status) VALUES
 ('Administrador', 'admin@gmail.com', (MD5("Admin@123")), 1, 2),
@@ -199,3 +212,32 @@ INSERT INTO user_has_empresa (idEmpresa, idUsuario) VALUES
 (3, 1),
 (4, 2),
 (5, 2);
+
+INSERT INTO setor (nome, idEmpresa, status) VALUES
+('Caixa central', 1, 1),
+('Hortifruti', 1, 1),
+('Higiene', 1, 1),
+('Perfumaria', 1, 1),
+('Petshop', 1, 1),
+('Padaria', 1, 1),
+('Açougue', 1, 1);
+
+INSERT INTO funcao (descricao, idSetor, status) VALUES
+('Empacotador', 1, 1),
+('Operador de caixa', 1, 1),
+('Auxiliar de Limpeza', 3, 1);
+
+INSERT INTO funcionario (nome, dataNascimento, rg, cpf, email, telefoneResidencial, telefoneCelular, idEndereco, idFuncao, idEmpresa, status) VALUES
+('Lucas Lopes de Souza', '1980-09-13', 123456789, "000.111.222-33", NULL, "(53) 32012341", "(53) 991012341", 3, 1, 1, 1),
+('Marcelo Pereira', '1980-09-13', 123456789, "000.111.222-33", NULL, "(53) 32012341", "(53) 991012341", 4, 2, 1, 1),
+('Bruna Perez de Oliveira', '1980-09-13', 123456789, "000.111.222-33", NULL, "(53) 32012341", "(53) 991012341", 5, 3, 1, 1);
+
+INSERT INTO infoAcidente (tipoDeRisco, agente, idSetor, medicao) VALUES
+('Risco Físico', 'Ruído', 1, '80 Db'),
+('Risco Físico', 'Ruído', 1, '84 Db'),
+('Risco de Acidente', 'Piso Molhado', 3, NULL);
+
+INSERT INTO acidente (descricao, data, idFuncionario, idInfoAcidente, idEmpresa, status) VALUES
+("Descrevendo o acidente....", '2018-11-13', 1, 1, 1, 1),
+("Descrevendo o acidente....", '2018-11-13', 2, 2, 1, 1),
+("Descrevendo o acidente....", '2018-11-13', 3, 3, 1, 1);

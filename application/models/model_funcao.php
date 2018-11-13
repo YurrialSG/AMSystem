@@ -1,14 +1,15 @@
 <?php
 
-class model_funcionario extends CI_Model {
+class model_funcao extends CI_Model {
 
     public function select($idUser) {
-        $sql = "select f.* from funcionario as f ";
-        $sql .= "inner join empresa as e on e.id = f.idEmpresa ";
-        $sql .= "inner join user_has_empresa as u on u.idEmpresa = f.idEmpresa ";
+        $sql = "select f.* from funcao as f ";
+        $sql .= "inner join setor as s on s.id = f.idSetor ";
+        $sql .= "inner join empresa as e on e.id = s.idEmpresa ";
+        $sql .= "inner join user_has_empresa as u on u.idEmpresa = s.idEmpresa ";
         $sql .= "inner join usuario as o on o.id = u.idUsuario ";
         $sql .= "where o.id = $idUser ";
-        $sql .= "group by f.nome ";
+        $sql .= "group by f.descricao";
         return $this->db->query($sql)->result();
     }
 
@@ -33,16 +34,6 @@ class model_funcionario extends CI_Model {
         $sql.= "INNER JOIN usuario ON user_has_empresa.idUsuario = usuario.id ";
         $sql .= "where usuario.id = $id ";
         return $this->db->query($sql)->result();
-    }
-
-    public function selectGraph01() {
-        $sql = "select e.nome as nomeEmpresa, count(a.id) ";
-        $sql .= "as num from acidente a ";
-        $sql .= "inner join empresa e on e.id = a.idEmpresa ";
-        $sql .= "group by e.nome ";
-        $query = $this->db->query($sql);
-        //result retorna array de dados
-        return $query->result();
     }
 
 }

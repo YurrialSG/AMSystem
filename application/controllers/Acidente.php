@@ -7,7 +7,10 @@ class Acidente extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('model_acidente', 'acidentesM');
+        $this->load->model('model_infoAcidente', 'infoaciM');
         $this->load->model('model_empresa', 'empresasM');
+        $this->load->model('model_funcionario', 'funcionariosM');
+        $this->load->model('model_setor', 'setoresM');
     }
 
     public function verica_sessao() {
@@ -23,7 +26,7 @@ class Acidente extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-        $dados['acidentes'] = "";
+        $dados['acidentes'] = '';
         $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
@@ -33,25 +36,18 @@ class Acidente extends CI_Controller {
 
     public function open_registros() {
         $idEmpresa = $this->input->post('idEmpresa');
-        $realizou = $dados['acidentes'] = $this->acidentesM->select($this->session->id, $idEmpresa);
+        $realizou = $dados['acidentes'] = $this->acidentesM->filtrarPorEmpresa($idEmpresa);
         if ($realizou) {
-            $tipo = "1";
-            $mensa .= "Busca foi realizada com sucesso!";
+            $dados['infoAci'] = $this->infoaciM->select();
+            $dados['funcionarios'] = $this->funcionariosM->select($this->session->id);
         } else {
-            $tipo = "0";
-            $mensa .= "Busca não foi realizada.";
+            $dados['acidentes'] = '';
         }
-        $this->session->set_flashdata('tipo', $tipo);
-        $this->session->set_flashdata('mensa', $mensa);
-        redirect(base_url('acidente/pagina'));
-    }
-
-    public function open_new_setores() {
         $dados['empresas'] = $this->empresasM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('crud/cad_setor', $dados);
+        $this->load->view('manut_acidentes', $dados);
     }
 
     public function incluir() {

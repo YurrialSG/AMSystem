@@ -39,7 +39,6 @@ if ($this->session->has_userdata('mensa')) {
             <table class="table table-hover" style="text-align: center;">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Nome</th>
                         <th>Data nasc.</th>
                         <th>RG</th>
@@ -52,16 +51,15 @@ if ($this->session->has_userdata('mensa')) {
                 <tbody>
                     <?php foreach ($funcionarios as $funcionario) { ?>
                         <tr>
-                            <td><?= $funcionario->id ?></td>
                             <td><?= $funcionario->nome ?></td>
                             <td><?= date_format(date_create($funcionario->dataNascimento), 'd/m/Y') ?></td>
                             <td><?= $funcionario->rg ?></td>
                             <td><?= $funcionario->cpf ?></td>
                             <?php
-                            foreach ($setores as $setor) {
-                                if ($setor->id == $funcionario->idSetor) {
+                            foreach ($funcoes as $funcao) {
+                                if ($funcao->id == $funcionario->idFuncao) {
                                     ?>     
-                                    <td><?= $setor->nome ?></td>
+                                    <td><?= $funcao->descricao ?></td>
                                     <?php
                                 }
                             }

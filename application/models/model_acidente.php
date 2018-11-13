@@ -2,14 +2,8 @@
 
 class model_acidente extends CI_Model {
 
-    public function select($idUser, $idEmpresa) {
-        $sql = "select a.* from acidente as a ";
-        $sql.= "inner join funcionario as f on f.id = a.idFuncionario ";
-        $sql.= "inner join empresa as e on e.id = f.idEmpresa ";
-        $sql.= "inner join user_has_empresa as u on u.idEmpresa = e.id ";
-        $sql.= "inner join usuario as o on o.id = u.idUsuario ";
-        $sql.= "where o.id = $idUser AND e.id = $idEmpresa ";
-        $sql.= "group by a.descricao ";
+    public function filtrarPorEmpresa($idEmpresa) {
+        $sql = "SELECT * FROM `acidente` WHERE `idEmpresa` = $idEmpresa";
         return $this->db->query($sql)->result();
     }
 
@@ -35,6 +29,36 @@ class model_acidente extends CI_Model {
         $sql.= "where e.id = $idEmpresa and u.idUsuario = $idUser group by s.nome ";
         $resultado = array($this->db->query($sql));
         return $resultado->result();
+    }
+
+    public function selectGraph01() {
+        $sql = "select s.nome as nomeSetor, count(i.id) ";
+        $sql.= "as num from infoacidente i ";
+        $sql.= "inner join setor s on s.id = i.idSetor ";
+        $sql.= "group by s.nome ";
+        $query = $this->db->query($sql);
+        //result retorna array de dados
+        return $query->result();
+    }
+
+    public function selectGraph02() {
+        $sql = "select e.nome as nomeEmpresa, count(a.id) ";
+        $sql .= "as num from acidente a ";
+        $sql .= "inner join empresa e on e.id = a.idEmpresa ";
+        $sql .= "group by e.nome ";
+        $query = $this->db->query($sql);
+        //result retorna array de dados
+        return $query->result();
+    }
+
+    public function totalReg($id) {
+        $sql = "SELECT COUNT(acidente.id) as total from acidente ";
+        $sql.= "INNER JOIN funcionario ON funcionario.id = acidente.idFuncionario ";
+        $sql.= "INNER JOIN empresa ON empresa.id = funcionario.idEmpresa ";
+        $sql.= "INNER JOIN user_has_empresa ON user_has_empresa.idEmpresa = empresa.id ";
+        $sql.= "INNER JOIN usuario ON usuario.id = user_has_empresa.idUsuario ";
+        $sql.= "where usuario.id = $id ";
+        return $this->db->query($sql)->result();
     }
 
 }

@@ -197,7 +197,9 @@
                                             <div class="col-xs-7">
                                                 <div class="numbers">
                                                     <p>Acidentes</p>
-                                                    23
+                                                    <?php foreach ($totalAcidente as $totalQuantidade) { ?>
+                                                        <?= $totalQuantidade->total ?>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -228,15 +230,27 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-lg-12 col-sm-12">
-                            <div class="card">
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="card">
+                                    <div id="grafico_Aci01" style="width: 550px; height: 400px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6">
+                                <div class="card">
+                                    <div id="grafico_Aci02" style="width: 550px; height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12">
+                                <div class="card">
+                                    <div id="grafico_Func01" style="width: 100%; height: 400px;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
