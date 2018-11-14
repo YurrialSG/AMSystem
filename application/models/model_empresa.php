@@ -10,13 +10,12 @@ class model_empresa extends CI_Model {
         return $this->db->query($sql)->result();
     }
 
-    public function insert($razaoSocial, $nome, $cnpj, $foto, $status) {
-        $sql = "INSERT INTO empresa (razaoSocial, nome, cnpj, foto, status) ";
+    public function insert($razaoSocial, $nome, $cnpj, $status) {
+        $sql = "INSERT INTO empresa (razaoSocial, nome, cnpj, status) ";
         $sql .= "VALUES ("
                 . "'" . $razaoSocial . "',"
                 . "'" . $nome . "',"
                 . "'" . $cnpj . "',"
-                . "'" . $foto . "',"
                 . "'" . $status . "');";
         $this->db->query($sql);
         return $this->db->insert_id();

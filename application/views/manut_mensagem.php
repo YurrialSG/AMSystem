@@ -157,6 +157,27 @@
 
 </style>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+<?php
+if ($this->session->has_userdata('mensa')) {
+    $mensa = $this->session->flashdata('mensa');
+    if ($this->session->flashdata('tipo') == '0') {
+        ?>
+                swal("Erro", "<?= $mensa ?>", "error");
+        <?php
+    } else {
+        ?>
+                swal("Sucesso", "<?= $mensa ?>", "success");
+        <?php
+    }
+}
+?>
+    });
+</script>
+
 <body>
     <div class="col-sm-10" style="margin-left: 200px; margin-top: -20px;">
         <br />
@@ -168,55 +189,67 @@
                 </a>
             </div>
         </div>
-        <?php
-        $contando = 0;
-        foreach ($mensagens as $mensagem) {
-            if (($contando % 2) == 0) {
-                ?>
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="blog-card alt">
-                            <div class="meta">
-                                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
-                                <ul class="details">
-                                    <li class="author"><?= $mensagem->nome ?></li>
-                                    <li class="date">July. 15, 2015</li>
-                                </ul>
+        <?php if ($mensagens) { ?>
+            <?php
+            $contando = 0;
+            foreach ($mensagens as $mensagem) {
+                if (($contando % 2) == 0) {
+                    ?>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="blog-card alt">
+                                <div class="meta">
+                                    <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
+                                    <ul class="details">
+                                        <li class="author"><?= $mensagem->nome ?></li>
+                                        <li class="date"><?= date_format(date_create($mensagem->data), 'd/m/Y') ?></li>
+                                    </ul>
+                                </div>
+                                <div class="description">
+                                    <h1><?= $mensagem->assunto ?></h1>
+                                    <h2><?= $mensagem->observacao ?></h2>
+                                    <p><?= $mensagem->descricao ?></p>
+                                    <a href="<?= base_url('mensagem/deletar/' . $mensagem->id) ?>" style="float: right;" class="btn btn-default btn-xs" onclick="return confirm('Confirma exclusão da mensagem \' <?= $mensagem->assunto ?> \' ?')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                    <a href = "<?= base_url('mensagem/alterar/' . $mensagem->id) ?>" style="float: right;" class="btn btn-secondary btn-xs"><span class = "glyphicon glyphicon-pencil" aria-hidden = "true"></span></a>
+                                </div>
                             </div>
-                            <div class="description">
-                                <h1><?= $mensagem->assunto ?></h1>
-                                <h2><?= $mensagem->observacao ?></h2>
-                                <p><?= $mensagem->descricao ?></p>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>
+                <?php } else { ?>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <div class="blog-card">
+                                <div class="meta">
+                                    <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+                                    <ul class="details">
+                                        <li class="author"><?= $mensagem->nome ?></a></li>
+                                        <li class="date"><?= date_format(date_create($mensagem->data), 'd/m/Y') ?></li>
+                                    </ul>
+                                </div>
+                                <div class="description">
+                                    <h1><?= $mensagem->assunto ?></h1>
+                                    <h2><?= $mensagem->observacao ?></h2>
+                                    <p><?= $mensagem->descricao ?></p>
+                                    <a href="<?= base_url('mensagem/deletar/' . $mensagem->id) ?>" style="float: right;" class="btn btn-default btn-xs" onclick="return confirm('Confirma exclusão da mensagem \' <?= $mensagem->assunto ?> \' ?')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                    <a href = "<?= base_url('mensagem/alterar/' . $mensagem->id) ?>" style="float: right;" class="btn btn-secondary btn-xs"><span class = "glyphicon glyphicon-pencil" aria-hidden = "true"></span></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3"></div>
-                </div>
-            <?php } else { ?>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9">
-                        <div class="blog-card">
-                            <div class="meta">
-                                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
-                                <ul class="details">
-                                    <li class="author"><?= $mensagem->nome ?></a></li>
-                                    <li class="date">Aug. 24, 2015</li>
-                                </ul>
-                            </div>
-                            <div class="description">
-                                <h1><?= $mensagem->assunto ?></h1>
-                                <h2><?= $mensagem->observacao ?></h2>
-                                <p><?= $mensagem->descricao ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
+                    <?php
+                }
+                $contando++;
             }
-            $contando++;
-        }
-        ?>
+            ?>
+        <?php } else { ?>
+            <br />
+            <div class="alert alert-info">
+                <strong>Aviso!</strong> Nenhum registro foi encontrado.
+            </div>
+            <br />
+        <?php } ?>
         <br />
         <div class="row">
             <div class="col-sm-10"></div>

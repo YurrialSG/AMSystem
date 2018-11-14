@@ -114,7 +114,9 @@ CREATE TABLE IF NOT EXISTS funcionario (
 CREATE TABLE IF NOT EXISTS infoAcidente (
   id int AUTO_INCREMENT,
   tipoDeRisco varchar(50) NOT NULL,
+  tipoDeAfastamento varchar(50) NOT NULL,
   agente varchar(50) NOT NULL,
+  diasAfastamento varchar(10) NOT NULL,
   idSetor int,
   medicao varchar(50) NOT NULL,
 
@@ -246,10 +248,10 @@ INSERT INTO funcionario (nome, dataNascimento, rg, cpf, email, telefoneResidenci
 ('Marcelo Pereira', '1980-09-13', 123456789, "000.111.222-33", NULL, "(53) 32012341", "(53) 991012341", 4, 2, 1, 1),
 ('Bruna Perez de Oliveira', '1980-09-13', 123456789, "000.111.222-33", NULL, "(53) 32012341", "(53) 991012341", 5, 3, 1, 1);
 
-INSERT INTO infoAcidente (tipoDeRisco, agente, idSetor, medicao) VALUES
-('Risco Físico', 'Ruído', 1, '80 Db'),
-('Risco Físico', 'Ruído', 1, '84 Db'),
-('Risco de Acidente', 'Piso Molhado', 3, NULL);
+INSERT INTO infoAcidente (tipoDeRisco, tipoDeAfastamento, agente, diasAfastamento, idSetor, medicao) VALUES
+('Risco Físico', 'Acidente com afastamento', 'Ruído', '16', 1, '80 Db'),
+('Risco Físico', 'Acidente com afastamento','Ruído', '8', 1, '84 Db'),
+('Risco de Acidente', 'Acidente sem afastamento','Piso Molhado', '0', 3, NULL);
 
 INSERT INTO acidente (descricao, data, idFuncionario, idInfoAcidente, idEmpresa, status) VALUES
 ("Descrevendo o acidente....", '2018-11-13', 1, 1, 1, 1),

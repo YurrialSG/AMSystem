@@ -2,6 +2,15 @@
 
 class model_acidente extends CI_Model {
 
+    public function select($idUser) {
+        $sql = "select a.* from acidente as a ";
+        $sql.= "inner join empresa e on e.id = a.idEmpresa ";
+        $sql.= "inner join user_has_empresa u on u.idEmpresa = e.id ";
+        $sql.= "inner join usuario o on o.id = u.idUsuario ";
+        $sql.= "where o.id = $idUser ";
+        return $this->db->query($sql)->result();
+    }
+
     public function filtrarPorEmpresa($idEmpresa) {
         $sql = "SELECT * FROM `acidente` WHERE `idEmpresa` = $idEmpresa";
         return $this->db->query($sql)->result();

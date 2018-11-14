@@ -6,29 +6,22 @@ class model_mensagem extends CI_Model {
         $sql = "select m.*, u.nome from mensagem as m ";
         $sql.= "inner join usuario as u on u.id = m.idUsuario ";
         $sql.= "where u.id = $id ";
+        $sql.= "group by m.id";
         return $this->db->query($sql)->result();
     }
 
-    public function insert($razaoSocial, $nome, $cnpj, $foto, $status) {
-        $sql = "INSERT INTO empresa (razaoSocial, nome, cnpj, foto, status) ";
-        $sql .= "VALUES ("
-                . "'" . $razaoSocial . "',"
-                . "'" . $nome . "',"
-                . "'" . $cnpj . "',"
-                . "'" . $foto . "',"
-                . "'" . $status . "');";
-        $this->db->query($sql);
-        return $this->db->insert_id();
+    public function insert($dados) {
+        return $this->db->insert('mensagem', $dados);
     }
 
     public function delete($id) {
         $this->db->where('id', $id);
-        $this->db->delete('empresa');
+        $this->db->delete('mensagem');
         return $this->db->affected_rows();
     }
 
     public function update($pegaID) {
-        $this->db->update('empresa', $pegaID);
+        $this->db->update('mensagem', $pegaID);
         return $this->db->affected_rows();
     }
 

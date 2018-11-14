@@ -57,96 +57,18 @@ if ($this->session->has_userdata('mensa')) {
                 <h3>Cadastrar <small>Acidente</small></h3>
                 <hr class="colorgraph">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-7">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <input type="text" name="nome" id="display_name" class="form-control input-group-lg" placeholder="Nome" tabindex="3" required autofocus>
+                            <input type="text" name="descricao" id="descricao" class="form-control input-group-lg" placeholder="Descrição" tabindex="3" required autofocus>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-2">
                         <div class="form-group">
-                            <input type="text" name="dataNascimento" id="dataNascimento" class="form-control input-group-lg" placeholder="Data de nasc." tabindex="3" required>
+                            <input type="date" name="data" id="data" class="form-control input-group-lg" placeholder="Data" tabindex="3" required>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="rg" id="rg" class="form-control input-group-lg" placeholder="RG" tabindex="3" required>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="cpf" id="cpf" class="form-control input-group-lg" placeholder="CPF" tabindex="3" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-5">
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-group-lg" placeholder="E-mail" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-5">
-                        <span class="badge badge-light">Opcional</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="tel" name="telefoneResidencial" id="telefoneRes" class="form-control input-group-lg" placeholder="Telefone" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <input type="tel" name="telefoneCelular" id="telefoneCel" class="form-control input-group-lg" placeholder="Celular" tabindex="3">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="cep" id="cep" class="form-control input-group-lg" placeholder="Cep" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <span id="validation" style="color: #fb3958;"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="logradouro" id="logradouro" class="form-control input-group-lg" placeholder="Rua" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="numero" id="numero" class="form-control input-group-lg" placeholder="Número" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="complemento" id="complemento" class="form-control input-group-lg" placeholder="Complemento" tabindex="3">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="form-group">
-                            <input type="text" name="bairro" id="bairro" class="form-control input-group-lg" placeholder="Bairro" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="form-group">
-                            <input type="text" name="cidade" id="cidade" class="form-control input-group-lg" placeholder="Cidade" tabindex="3">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-2">
-                        <div class="form-group">
-                            <input type="text" name="estado" id="estado" class="form-control input-group-lg" placeholder="Estado" tabindex="3">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-5">
                         <select name="idEmpresa" id="idEmpresa" class="form-control" required style="width: 100%;">
                             <option value="">Selecione a empresa...</option>
@@ -155,54 +77,89 @@ if ($this->session->has_userdata('mensa')) {
                             <?php } ?>
                         </select>
                     </div>
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <select name="idFuncionario" id="idFuncionario" class="form-control" required style="width: 100%;">
+                            <option value=""> Selecione o funcionário... </option>
+                            <?php foreach ($funcionarios as $funcionario) { ?>
+                                <option value="<?= $funcionario->id ?>"> 
+                                    <?php
+                                    foreach ($empresas as $empresa) {
+                                        if ($empresa->id == $funcionario->idEmpresa) {
+                                            ?>
+                                            <?= $funcionario->nome ?> (<?= $empresa->nome ?>) </option>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <select name="tipoDeRisco" id="tipoDeRisco" class="form-control" required style="width: 100%;">
+                            <option value=""> Selecione o tipo de risco... </option>
+                            <option value="Risco Físico"> Risco Físico </option>
+                            <option value="Risco Químico"> Risco Químico </option>
+                            <option value="Risco Biologico"> Risco Biologico </option>
+                            <option value="Risco Ergonomico"> Risco Ergonomico </option>
+                            <option value="Risco de Acidente"> Risco Acidente </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group">
+                            <input type="text" name="agente" id="agente" class="form-control input-group-lg" placeholder="Descrição sobre agentes presentes" tabindex="3">
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <select name="idSetor" id="idSetor" class="form-control" required style="width: 100%;">
                             <option value=""> Selecione o setor... </option>
+                            <?php foreach ($setores as $setor) { ?>
+                                <option value="<?= $setor->id ?>">
+                                    <?php
+                                    foreach ($empresas as $empresa) {
+                                        if ($empresa->id == $setor->idEmpresa) {
+                                            ?>
+                                            <?= $setor->nome ?> (<?= $empresa->nome ?>) </option>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3" id="validaSetor" style="display: none;">
-                        <span class="badge badge-warning">Setor não encontrado...</span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <select name="tipoDeAfastamento" id="tipoDeAfastamento" class="form-control" required style="width: 100%;">
+                            <option value=""> Selecione o tipo de acidente... </option>
+                            <option value="Acidente com afastamento"> Acidente COM Afastamento </option>
+                            <option value="Acidente sem afastamento"> Acidente SEM Afastamento </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="form-group">
+                            <input type="number" name="diasAfastamento" id="diasAfastamento" min="0" class="form-control input-group-lg" placeholder="Número" tabindex="3">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-2">
+                        <div class="form-group">
+                            <input type="text" name="medicao" id="medicao" class="form-control input-group-lg" placeholder="Medição" tabindex="3">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-1">
+                        <span class="badge badge-light">Qualitativa fica vazio</span>
                     </div>
                 </div>
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-md-3"><input type="submit" value="Cadastrar" class="btn btn-primary btn-block btn-circle btn-group-sm" tabindex="7"></div>
                     <div class="col-xs-12 col-md-7"></div>
-                    <div class="col-xs-12 col-md-2"><a href="<?= base_url('setor') ?>" class="btn btn-default btn-block btn-circle btn-group-sm">Voltar</a></div>
+                    <div class="col-xs-12 col-md-2"><a href="<?= base_url('acidente') ?>" class="btn btn-default btn-block btn-circle btn-group-sm">Voltar</a></div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#idSetor').attr("disabled", true);
-        $('#idEmpresa').on('change', function () {
-            $('#validaSetor').css("display", "none");
-            var idEmpresa = $(this).val();
-            if (idEmpresa === '') {
-                $('#idSetor').attr("disabled", true);
-            } else {
-                $('#idSetor').attr('disabled', false);
-                $.ajax({
-                    url: "http://localhost/AMSystem/funcionario/getSetores",
-                    type: 'POST',
-                    data: {'idEmpresa': idEmpresa},
-                    dataType: 'json',
-                    success: function (data) {
-                        $('#idSetor').html(data);
-                    },
-                    error: function (error) {
-                        alert(error.toString());
-                        $('#idSetor').attr("disabled", true);
-                        $('#validaSetor').css("display", "block");
-                    }
-                });
-            }
-        });
-    });
-</script>
-
 </body>
 </html>

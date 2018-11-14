@@ -1,24 +1,3 @@
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-<?php
-if ($this->session->has_userdata('mensa')) {
-    $mensa = $this->session->flashdata('mensa');
-    if ($this->session->flashdata('tipo') == '0') {
-        ?>
-                swal("Erro", "<?= $mensa ?>", "error");
-        <?php
-    } else {
-        ?>
-                swal("Sucesso", "<?= $mensa ?>", "success");
-        <?php
-    }
-}
-?>
-    });
-</script>
-
 <style>
     @import url(https://fonts.googleapis.com/css?family=Lato:400,700,900);
 
@@ -38,7 +17,7 @@ if ($this->session->has_userdata('mensa')) {
 
     .clash-card {
         background: white;
-        width: 300px;
+        width: 450px;
         display: inline-block;
         margin: auto;
         border-radius: 19px;
@@ -58,13 +37,15 @@ if ($this->session->has_userdata('mensa')) {
 
     .clash-card__image--barbarian {
         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/barbarian-bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
     }
 
     .clash-card__image--barbarian img {
         width: 400px;
         position: absolute;
         top: -65px;
-        left: -70px;
+        left: 30px;
     }
 
     .clash-card__level {
@@ -91,10 +72,6 @@ if ($this->session->has_userdata('mensa')) {
     }
 </style>
 
-<script type="text/javascript">
-
-</script>
-
 <body>
     <div class="col-sm-10" style="margin-left: 200px; margin-top: -20px;">
         <?php
@@ -102,14 +79,7 @@ if ($this->session->has_userdata('mensa')) {
         $image_rand = base_url('icon/imagem' . $rand . '.png');
         ?>
         <br />
-        <div class="row">
-            <div class="col-sm-9"></div>
-            <div class="col-sm-3"> 
-                <a href="<?= base_url('empresa/open_new_empresas') ?>" class="btn btn-info btn-link">
-                    <span class="glyphicon glyphicon-edit"></span> Alterar Dados Pessoais
-                </a>
-            </div>
-        </div>
+        <br />
         <div class="slide-container">
             <div class="wrapper">
                 <div class="clash-card barbarian">
@@ -124,6 +94,9 @@ if ($this->session->has_userdata('mensa')) {
                         <?php } ?> 
                         <br />
                         <span><?= $this->session->email ?></span>
+                        <a href = "<?= base_url('usuario/alterar/' . $this->session->id) ?>" style="float: right;" class="btn btn-default btn-xs">
+                            <span class = "glyphicon glyphicon-pencil" aria-hidden = "true"></span>
+                        </a>
                     </div>
                 </div> <!-- end clash-card barbarian-->
             </div> <!-- end wrapper -->
