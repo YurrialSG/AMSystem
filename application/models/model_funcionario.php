@@ -35,11 +35,10 @@ class model_funcionario extends CI_Model {
         return $this->db->query($sql)->result();
     }
 
-    public function selectGraph01() {
-        $sql = "select e.nome as nomeEmpresa, count(a.id) ";
-        $sql .= "as num from acidente a ";
-        $sql .= "inner join empresa e on e.id = a.idEmpresa ";
-        $sql .= "group by e.nome ";
+    public function selectGraph01($idUser) {
+        $sql = "select e.nome as nomeEmpresa, count(f.id) as num ";
+        $sql.= "from funcionario f inner join empresa ";
+        $sql.= "e on e.id = f.idEmpresa group by e.nome ";
         $query = $this->db->query($sql);
         //result retorna array de dados
         return $query->result();

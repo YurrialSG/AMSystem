@@ -178,7 +178,9 @@
                                             <div class="col-xs-7">
                                                 <div class="numbers">
                                                     <p>Mensagens</p>
-                                                    03
+                                                    <?php foreach ($totalMensagem as $totalQuantidade) { ?>
+                                                        <?= $totalQuantidade->total ?>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -247,16 +249,18 @@
 
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-lg-12 col-sm-12">
+                            <div class="col-lg-7 col-sm-7">
                                 <div class="card">
-                                    <div id="grafico_Func01" style="width: 100%; height: 400px;"></div>
+                                    <div id="grafico_Func01" style="width: 100%; height: 350px;"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-sm-5">
+                                <div class="card">
+                                    <div id="grafico_Func01" style="width: 100%; height: 350px;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>

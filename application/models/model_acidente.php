@@ -31,21 +31,28 @@ class model_acidente extends CI_Model {
         return $resultado->result();
     }
 
-    public function selectGraph01() {
-        $sql = "select s.nome as nomeSetor, count(i.id) ";
-        $sql.= "as num from infoacidente i ";
-        $sql.= "inner join setor s on s.id = i.idSetor ";
+//    ATENÇÃO ARRUMAR BUSCA DOS GRAFICOS COM DADOS DO USUARIO LOGADO
+
+    public function selectGraph01($idUser) {
+        $sql = "select s.nome as nomeSetor, count(i.id) as num ";
+        $sql.= "from infoacidente i inner join setor s on s.id = i.idSetor ";
+        $sql.= "inner join empresa e on e.id = s.idEmpresa ";
+        $sql.= "inner join user_has_empresa u on u.idEmpresa = e.id ";
+        $sql.= "inner join usuario o on o.id = u.idUsuario ";
+        $sql.= "where o.id = $idUser ";
         $sql.= "group by s.nome ";
         $query = $this->db->query($sql);
         //result retorna array de dados
         return $query->result();
     }
 
-    public function selectGraph02() {
-        $sql = "select e.nome as nomeEmpresa, count(a.id) ";
-        $sql .= "as num from acidente a ";
-        $sql .= "inner join empresa e on e.id = a.idEmpresa ";
-        $sql .= "group by e.nome ";
+    public function selectGraph02($idUser) {
+        $sql = "select e.nome as nomeEmpresa, count(a.id) as num ";
+        $sql.= "from acidente a inner join empresa e on e.id = a.idEmpresa ";
+        $sql.= "inner join user_has_empresa u on u.idEmpresa = e.id ";
+        $sql.= "inner join usuario o on o.id = u.idUsuario ";
+        $sql.= "where o.id = $idUser ";
+        $sql.= "group by e.nome ";
         $query = $this->db->query($sql);
         //result retorna array de dados
         return $query->result();

@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
         $this->load->model('model_empresa', 'empresasM');
         $this->load->model('model_funcionario', 'funcionariosM');
         $this->load->model('model_acidente', 'acidentesM');
+        $this->load->model('model_mensagem', 'mensagensM');
     }
 
     public function verica_sessao() {
@@ -32,12 +33,13 @@ class Admin extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-        $dadosAci01['acidentesSetor'] = $this->acidentesM->selectGraph01();
-        $dadosAci02['acidentesEmpresa'] = $this->acidentesM->selectGraph02();
-        $dadosFunc01['funcionariosEmpresa'] = $this->funcionariosM->selectGraph01();
+        $dadosAci01['acidentesSetor'] = $this->acidentesM->selectGraph01($this->session->id);
+        $dadosAci02['acidentesEmpresa'] = $this->acidentesM->selectGraph02($this->session->id);
+        $dadosFunc01['funcionariosEmpresa'] = $this->funcionariosM->selectGraph01($this->session->id);
         $dados['totalEmpresa'] = $this->empresasM->totalReg($this->session->id);
         $dados['totalFuncionario'] = $this->funcionariosM->totalReg($this->session->id);
         $dados['totalAcidente'] = $this->acidentesM->totalReg($this->session->id);
+        $dados['totalMensagem'] = $this->mensagensM->totalReg($this->session->id);
 
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');

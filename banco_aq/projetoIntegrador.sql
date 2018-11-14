@@ -5,12 +5,11 @@ CREATE DATABASE projetointegrador CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE projetointegrador;
 
 -- 1
-CREATE TABLE empresa (
+CREATE TABLE empresa  (
   id INT NOT NULL AUTO_INCREMENT,
   razaoSocial varchar(100) NOT NULL,
   nome varchar(50) NOT NULL,
   cnpj varchar(50) NOT NULL,
-  foto varchar(50),
   status int NOT NULL,
   PRIMARY KEY(id)
 );
@@ -168,7 +167,6 @@ CREATE TABLE IF NOT EXISTS acidente (
   PRIMARY KEY(id)
 );
 
-
 CREATE TABLE user_has_empresa (
 idEmpresa INT NOT NULL,
 idUsuario INT NOT NULL,
@@ -182,18 +180,34 @@ CONSTRAINT fk_user_empresa
     REFERENCES usuario (id)
 );
 
+CREATE TABLE IF NOT EXISTS mensagem (
+  id int AUTO_INCREMENT,
+  descricao varchar(2000) NOT NULL,
+  assunto varchar(50) NOT NULL,
+  observacao varchar(50) NOT NULL,
+  data date NOT NULL,
+  idUsuario INT NOT NULL,
+  status int NOT NULL,
+
+  CONSTRAINT fk_mensa_usuario
+  FOREIGN KEY (idUsuario)
+  REFERENCES usuario (id),
+  
+  PRIMARY KEY(id)
+);
+
 INSERT INTO estado (sigla) VALUES
 ('RS');
 
 INSERT INTO cidade (nome, idEstado) VALUES
 ('Pelotas', 1);
 
-INSERT INTO empresa (razaoSocial, nome, cnpj, foto, status) VALUES
-('Macro Atacado Treichel LTDA 1', 'Macro Atacado Treichel 1', '03.204.565/0001-89', 'd272e06c5af2a380c10c05cd8ccec0b4.png', 1),
-('Macro Atacado Treichel LTDA 2', 'Macro Atacado Treichel 2', '03.204.565/0001-89', NULL, 1),
-('Macro Atacado Treichel LTDA 3', 'Macro Atacado Treichel 3', '03.204.565/0001-89', NULL, 1),
-('Macro Atacado Treichel LTDA 4', 'Macro Atacado Treichel 4', '03.204.565/0001-89', NULL, 1),
-('Macro Atacado Treichel LTDA 5', 'Macro Atacado Treichel 5', '03.204.565/0001-89', NULL, 1);
+INSERT INTO empresa (razaoSocial, nome, cnpj, status) VALUES
+('Macro Atacado Treichel LTDA 1', 'Treichel 1', '03.204.565/0001-89', 1),
+('Macro Atacado Treichel LTDA 2', 'Treichel 2', '03.204.565/0001-89', 1),
+('Macro Atacado Treichel LTDA 3', 'Treichel 3', '03.204.565/0001-89', 1),
+('Macro Atacado Treichel LTDA 4', 'Treichel 4', '03.204.565/0001-89', 1),
+('Macro Atacado Treichel LTDA 5', 'Treichel 5', '03.204.565/0001-89', 1);
 
 INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, idCidade, status) VALUES
 ('Rua Montenegro', 111, '', '96090-420', 'Laranjal', 1, 1),
@@ -203,7 +217,7 @@ INSERT INTO endereco (logradouro, numero, complemento, cep, bairro, idCidade, st
 ('Rua Montenegro 2', 111, '', '96090-420', 'Laranjal', 1, 1);
 
 INSERT INTO usuario (nome, email, senha, idEndereco, status) VALUES
-('Administrador', 'admin@gmail.com', (MD5("Admin@123")), 1, 2),
+('Administrador', 'yuriinternacional86@gmail.com', (MD5("Yuri@123")), 1, 2),
 ('Administrador 2', 'admin2@gmail.com', (MD5("Admin2@123")), 2, 2);
 
 INSERT INTO user_has_empresa (idEmpresa, idUsuario) VALUES
@@ -241,3 +255,9 @@ INSERT INTO acidente (descricao, data, idFuncionario, idInfoAcidente, idEmpresa,
 ("Descrevendo o acidente....", '2018-11-13', 1, 1, 1, 1),
 ("Descrevendo o acidente....", '2018-11-13', 2, 2, 1, 1),
 ("Descrevendo o acidente....", '2018-11-13', 3, 3, 1, 1);
+
+INSERT INTO mensagem (descricao, assunto, observacao, data, idUsuario, status) VALUES
+("Efetuar treinamento NR 33 aos colaboradores.", 'Treinamentos Normas Regulamentadoras', 'Treinamentos futuros pendentes', '2018-11-13', 1, 1),
+("Efetuar treinamento NR 33 aos colaboradores. aoieoeaioe ioaeaoiioei oeieaieaioea eiaoeaiea o ea ieaoaei aeoea ieaoie oeaiaeia eieaoeai eaoea", 'Treinamentos Normas Regulamentadoras', 'Treinamentos futuros pendentes', '2018-11-13', 1, 1),
+("Efetuar treinamento NR 33 aos colaboradores. a eo ieie eaiooeaie aiaeoaeii e aoeio ioaie oeieaoeai eaoieaea eaioaeie aoaeieoaie aoeaieao e ai aeoi eaoi aeeaiae oieaaeoi aeaeoieao ieaoiaeo ieo aieaoea iaeieaoie aead", 'Treinamentos Normas Regulamentadoras', 'Treinamentos futuros pendentes', '2018-11-13', 1, 1),
+("Efetuar treinamento NR 33 aos colaboradores. aoieio eaioe aieaio aeoeaeaie ae aoiea ieai eaoea ieo eiea oieao eaie aoie aoe aiaeo eaia oeiaeo aeieoe aaeioaea eioeai aeoa ei o eaoaeo iaeoaei eaoea ioeaiaeo aeea ieaoea ieaoaeiaeo iaeoae iaeo eai aeoa eeiaae", 'Treinamentos Normas Regulamentadoras', 'Treinamentos futuros pendentes', '2018-11-13', 1, 1);

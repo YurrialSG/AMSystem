@@ -48,16 +48,69 @@ class Empresa extends CI_Controller {
         $razaoSocial = $this->input->post('razaoSocial');
         $nome = $this->input->post('nome');
         $cnpj = $this->input->post('cnpj');
-        $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $status);
-        
-        $realizou = $this->userEmpresasM->insert($this->session->id, $idEmpresa);
 
-        if ($realizou) {
+        $config['upload_path'] = base_url() . 'fotos/';
+        $config['encrypt_name'] = true;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('foto')) {
+            $tipo = "0";
+            $mensa = "Erro... Arquivo Inválido ";
+        } else {
+            $arquivo = $this->upload->data();
+            $foto = $arquivo['file_name'];
+            $idEmpresa = $this->empresasM->insert($razaoSocial, $nome, $cnpj, $foto, $status);
+            $realizou = $this->userEmpresasM->insert($this->session->id, $idEmpresa);
+
+            if ($realizou) {
+                $tipo = "1";
+                $mensa .= "Cadastro realizado com sucesso!";
+            } else {
+                $tipo = "0";
+                $mensa .= "Cadastro não efetuado.";
+            }
+        }
+
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+        redirect(base_url('empresa/pagina'));
+    }
+
+    public function alterar($id) {
+        $this->db->where('id', $id);
+        $dados['empresas'] = $this->db->get('empresa')->row();
+        $this->load->view('include/inc_header.php');
+        $this->load->view('include/inc_navbarAdmin.php');
+        $this->load->view('include/inc_menuAdmin.php');
+        $this->load->view('crud/alt_empresa', $dados);
+    }
+
+    public function grava_alteracao() {
+        $pegaID = $this->input->post();
+        $this->db->where('id', $pegaID['id']);
+
+        if ($this->empresasM->update($pegaID)) {
             $tipo = "1";
-            $mensa .= "Cadastro realizado com sucesso!";
+            $mensa .= "Alteração realizada com sucesso!";
         } else {
             $tipo = "0";
-            $mensa .= "Cadastro não efetuado.";
+            $mensa .= "Alteração não efetuada.";
+        }
+        $this->session->set_flashdata('tipo', $tipo);
+        $this->session->set_flashdata('mensa', $mensa);
+
+        redirect(base_url('empresa/pagina'));
+    }
+
+    public function deletar($id) {
+        $verifica_erro = $this->db->_error_number() == 1451;
+        if ($this->empresasM->delete($id) == $verifica_erro) {
+            $tipo = "0";
+            $mensa .= "Remoção não efetuada.";
+        } else {
+            $tipo = "1";
+            $mensa .= "Remoção realizada com sucesso!";
         }
         $this->session->set_flashdata('tipo', $tipo);
         $this->session->set_flashdata('mensa', $mensa);

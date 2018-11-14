@@ -42,7 +42,6 @@ if ($this->session->has_userdata('mensa')) {
                         <th>Nome</th>
                         <th>Razão Social</th>
                         <th>Cnpj</th>
-                        <th>Foto</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -52,13 +51,6 @@ if ($this->session->has_userdata('mensa')) {
                             <td><?= $empresa->nome ?></td>
                             <td><?= $empresa->razaoSocial ?></td>
                             <td><?= $empresa->cnpj ?></td>
-                            <td>
-                                <?php if ($empresa->foto != null) { ?>            
-                                    <img src="<?= base_url() . './fotos/' . $empresa->foto ?>" width="120" height="50">
-                                <?php } else { ?>
-                                    <span class="glyphicon glyphicon-picture"></span>              
-                                <?php } ?>
-                            </td>
                             <td>
                                 <a href="<?= base_url('empresa/alterar/' . $empresa->id) ?>" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
                                 &nbsp;

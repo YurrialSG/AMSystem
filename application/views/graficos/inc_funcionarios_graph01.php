@@ -4,15 +4,15 @@
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Setor');
-        data.addColumn('number', 'Nº Acidentes');
+        data.addColumn('string', 'Empresa');
+        data.addColumn('number', 'Nº Funcionarios');
 
-<?php foreach ($acidentesSetor as $acidente) { ?>
-            data.addRows([['<?= $acidente->nomeSetor ?>', <?= $acidente->num ?>]]);
+<?php foreach ($funcionariosEmpresa as $funcionariosEmp) { ?>
+            data.addRows([['<?= $funcionariosEmp->nomeEmpresa ?>', <?= $funcionariosEmp->num ?>]]);
 <?php } ?>
 
         var options = {
-            title: 'Nº de Acidentes por Setor',
+            title: 'Nº de Funcionários por Empresas',
             is3D: true
         };
 

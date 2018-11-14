@@ -1,12 +1,11 @@
 <?php
 
-class model_empresa extends CI_Model {
+class model_mensagem extends CI_Model {
 
     public function select($id) {
-        $sql = "select e.* from empresa as e ";
-        $sql .= "inner join user_has_empresa as u on u.idEmpresa = e.id ";
-        $sql .= "where idUsuario = $id ";
-        $sql .= "group by e.nome";
+        $sql = "select m.*, u.nome from mensagem as m ";
+        $sql.= "inner join usuario as u on u.id = m.idUsuario ";
+        $sql.= "where u.id = $id ";
         return $this->db->query($sql)->result();
     }
 
@@ -42,10 +41,9 @@ class model_empresa extends CI_Model {
     }
 
     public function totalReg($id) {
-        $sql = "SELECT COUNT(usuario.id) as total from usuario ";
-        $sql .= "INNER JOIN user_has_empresa ";
-        $sql .= "ON usuario.id = user_has_empresa.idUsuario ";
-        $sql .= "where usuario.id = $id ";
+        $sql = "SELECT COUNT(mensagem.id) as total from mensagem ";
+        $sql.= "INNER JOIN usuario ON usuario.id = mensagem.idUsuario ";
+        $sql.= "where usuario.id = $id ";
         return $this->db->query($sql)->result();
     }
 

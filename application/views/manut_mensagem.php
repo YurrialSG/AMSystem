@@ -168,35 +168,55 @@
                 </a>
             </div>
         </div>
-        <br />
-        <div class="blog-card">
-            <div class="meta">
-                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
-                <ul class="details">
-                    <li class="author">John Doe</a></li>
-                    <li class="date">Aug. 24, 2015</li>
-                </ul>
-            </div>
-            <div class="description">
-                <h1>Learning to Code</h1>
-                <h2>Opening a door to the future</h2>
-                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            </div>
-        </div>
-        <div class="blog-card alt">
-            <div class="meta">
-                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
-                <ul class="details">
-                    <li class="author">Jane Doe</li>
-                    <li class="date">July. 15, 2015</li>
-                </ul>
-            </div>
-            <div class="description">
-                <h1>Mastering the Language</h1>
-                <h2>Java is not the same as JavaScript</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-            </div>
-        </div>
+        <?php
+        $contando = 0;
+        foreach ($mensagens as $mensagem) {
+            if (($contando % 2) == 0) {
+                ?>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="blog-card alt">
+                            <div class="meta">
+                                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)"></div>
+                                <ul class="details">
+                                    <li class="author"><?= $mensagem->nome ?></li>
+                                    <li class="date">July. 15, 2015</li>
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1><?= $mensagem->assunto ?></h1>
+                                <h2><?= $mensagem->observacao ?></h2>
+                                <p><?= $mensagem->descricao ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            <?php } else { ?>
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-9">
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+                                <ul class="details">
+                                    <li class="author"><?= $mensagem->nome ?></a></li>
+                                    <li class="date">Aug. 24, 2015</li>
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1><?= $mensagem->assunto ?></h1>
+                                <h2><?= $mensagem->observacao ?></h2>
+                                <p><?= $mensagem->descricao ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            $contando++;
+        }
+        ?>
         <br />
         <div class="row">
             <div class="col-sm-10"></div>

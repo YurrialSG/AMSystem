@@ -37,4 +37,23 @@ class model_usuario extends CI_Model {
         return $this->db->affected_rows();
     }
 
+    public function findEmail($email) {
+        $sql = "select * from usuario where email = '$email'";
+        $query = $this->db->query($sql);
+        //retorna o registro obitdo
+        return $query->row();
+    }
+
+    public function updateSenhaTemporaria($email, $senhaTemporaria) {
+        $sql = "UPDATE usuario SET hashTemporaria = '$senhaTemporaria' WHERE email = '$email'";
+        $this->db->query($sql);
+        return $this->db->affected_rows();
+    }
+
+    public function updateNovaSenha($codigo, $senhaNova) {
+        $sql = "UPDATE usuario SET senha = '$senhaNova' WHERE hashTemporaria = '$codigo'";
+        $this->db->query($sql);
+        return $this->db->affected_rows();
+    }
+
 }

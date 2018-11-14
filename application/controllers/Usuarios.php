@@ -175,8 +175,6 @@ class Usuarios extends CI_Controller {
             $this->session->set_flashdata('mensa', $mensa);
             redirect('usuarios/cadastrar');
         }
-
-//inserindo Empresa do usuário logado
     }
 
     public function login() {
@@ -242,6 +240,131 @@ class Usuarios extends CI_Controller {
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
         $this->load->view('manut_usuario', $dados);
+    }
+
+    public function gravaAlteracaoSenhaTemporaria() {
+        $codigo = $this->input->post('codigo');
+        $senhaNova = md5($this->input->post('senha'));
+
+        $realizou = $this->usuariosM->updateNovaSenha($codigo, $senhaNova);
+
+        if ($realizou) {
+            $tipo = "1";
+            $mensa = "Nova Senha inserida com sucesso!";
+
+            $this->session->set_flashdata('tipo', $tipo);
+            $this->session->set_flashdata('mensa', $mensa);
+
+            redirect(base_url('usuarios/login'));
+        } else {
+            $tipo = "0";
+            $mensa = "Não foi possivel cadastrar a Nova Senha.";
+            $this->session->set_flashdata('tipo', $tipo);
+            $this->session->set_flashdata('mensa', $mensa);
+
+            $this->load->view('include/inc_header.php');
+            $this->load->view('esqueceuSenha');
+        }
+    }
+
+    public function configura() {
+
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+        $config['smtp_port'] = '465';
+        $config['smtp_timeout'] = '30';
+        $config['smtp_user'] = 'amsystemrh@gmail.com';
+        $config['smtp_pass'] = 'Amsystem@2018';
+        $config['charset'] = 'utf-8';
+        //deve ser aspas dupls ""
+        $config['newline'] = "\r\n";
+        $config['mailtype'] = "html";
+        $config['wordwrap'] = TRUE;
+
+        $this->email->initialize($config);
+    }
+
+    public function envioEmailRecuperarSenha() {
+        //função gerar hash temporária
+        $lmin = 'abcdefghijklmnopqrstuvwxyz';
+        $lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $num = '1234567890';
+        $simb = '!@#$%*-';
+        $retorno = '';
+        $caracteres = '';
+        $caracteres .= $lmin;
+        $caracteres .= $lmai;
+        $caracteres .= $num;
+        $caracteres .= $simb;
+        $len = strlen($caracteres);
+        //20 significa o tamanho da hash a ser gerada
+        for ($n = 1; $n <= 20; $n++) {
+            $rand = mt_rand(1, $len);
+            $retorno .= $caracteres[$rand - 1];
+        }
+        $senhaTemporaria = $retorno;
+
+        $email = $this->input->post('email');
+
+        //alterar campo senha temporaria no banco
+        $encontrouEmail = $this->usuariosM->findEmail($email);
+
+        if ($encontrouEmail) {
+            //antes de enviar o e-mail, será alterado o campo senhaTemporaria na tabela Usuário
+            $this->usuariosM->updateSenhaTemporaria($email, $senhaTemporaria);
+
+            //carrega a biblioteca para o envio de e-mails
+            $this->load->library('email');
+
+            $assunto = "AMSystem - Solicitação de Nova Senha";
+
+            $senha = "Amsystem@2018";
+
+            $mensagem = "<h2 style='text-align: center;'> AMSystem - Sistema de Gerenciamento de Acidentes</h2>";
+
+
+            $mensagem .= "<h2 style='color: #E86C8D; text-align: center;'>Recuperação de Senha</h2>";
+            $mensagem .= "<h4 style='text-align: center;'>"
+                    . "Foi solicitada a recuperação de senha.<br>"
+                    . "É necessário que insira o código abaixo na página de renovação de senha."
+                    . "</h4>";
+
+            $mensagem .= "<h1 style='color: #4cae4c; text-align: center;'>" . $senhaTemporaria . "</h1>";
+
+            // n1 2 br: converte 'enters' em comandos <br>
+            $mensagem .= nl2br($this->input->post('mensagem'));
+
+            $this->configura($senha);
+
+            $this->email->from('amsystemrh@gmail.com', 'AMSystem');
+            $this->email->to($email);
+            $this->email->subject($assunto);
+            $this->email->message($mensagem);
+
+            if ($this->email->send()) {
+
+                $tipo = "1";
+                $mensa = "Um e-mail foi enviado ao seu endereço.";
+
+                //define a variavel de sessão com a mensagem a ser exibida e indicação de erro
+                $this->session->set_flashdata('tipo', $tipo);
+                $this->session->set_flashdata('mensa', $mensa);
+
+                $this->load->view('include/inc_header.php');
+                $this->load->view('esqueceuSenha');
+            } else {
+                print_r($this->email->print_debugger());
+            }
+        } else {
+            $tipo = "0";
+            $mensa = "E-mail não foi localizado";
+
+            //define a variavel de sessão com a mensagem a ser exibida e indicação de erro
+            $this->session->set_flashdata('tipo', $tipo);
+            $this->session->set_flashdata('mensa', $mensa);
+
+            redirect(base_url('usuarios/login'));
+        }
     }
 
 }

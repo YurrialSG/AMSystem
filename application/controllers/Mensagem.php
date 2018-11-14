@@ -6,7 +6,7 @@ class Mensagem extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        
+        $this->load->model('model_mensagem', 'mensagensM');
     }
 
     public function verica_sessao() {
@@ -22,11 +22,11 @@ class Mensagem extends CI_Controller {
 
     public function pagina() {
         $this->verica_sessao();
-
+        $dados['mensagens'] = $this->mensagensM->select($this->session->id);
         $this->load->view('include/inc_header.php');
         $this->load->view('include/inc_navbarAdmin.php');
         $this->load->view('include/inc_menuAdmin.php');
-        $this->load->view('manut_mensagem');
+        $this->load->view('manut_mensagem', $dados);
     }
 
 }
